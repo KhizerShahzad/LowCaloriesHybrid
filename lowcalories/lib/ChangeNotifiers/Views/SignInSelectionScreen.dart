@@ -18,7 +18,7 @@ class SignInSelectionScreen extends StatelessWidget {
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              title: const Text('ALERT'),
+              title: const Text('ALERT',style: TextStyle(fontSize: 20),),
               content: const Text('Are you sure you want to Exit?'),
               actions: <Widget>[
                 TextButton(
@@ -35,31 +35,6 @@ class SignInSelectionScreen extends StatelessWidget {
             ),
           );
 
-
-
-
-
-    /*      AlertDialog(
-            title: const Text('ALERT'),
-            content: const Text('Are you sure you want to Exit?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  SystemNavigator.pop();
-                },
-                child: const Text('Yes'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'No',
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            ],
-          ).build(context);*/
         },
         child: SingleChildScrollView(
           child: Container(

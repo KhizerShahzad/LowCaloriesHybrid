@@ -78,14 +78,20 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       if (stageLevel == 0) {
         if (stage1Complete) {
           moveForward(currentStageText: AppStrings().goalScreen2Text);
+        }else{
+          showNoItemSelected(mContext);
         }
       } else if (stageLevel == 1) {
         if (stage2Complete) {
           moveForward(currentStageText: AppStrings().goalScreen3Text);
+        }else{
+          showNoItemSelected(mContext);
         }
       } else if (stageLevel == 2) {
         if (stage3Complete) {
           moveForward(currentStageText: AppStrings().goalScreen4Text);
+        }else{
+          showNoItemSelected(mContext);
         }
       } else if (stageLevel == 3) {
         if (stage4Complete) {}
@@ -96,7 +102,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             context: mContext,
             builder: (mContext) {
               return AlertDialog(
-                title: const Text('ALERT'),
+                title: const Text('ALERT',style: TextStyle(fontSize: 20),),
                 content: const Text('Are you sure you want to move back?\nYour Progress will be lost!'),
                 actions: [
                   TextButton(
@@ -130,6 +136,29 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         moveBackword(currentStageText: AppStrings().goalScreen3Text);
       }
     }
+  }
+  showNoItemSelected(BuildContext mContext)
+  {
+    showDialog(
+        context: mContext,
+        builder: (mContext) {
+          return AlertDialog(
+            title: const Text('INFO',style: TextStyle(fontSize: 20),),
+            content: const Text('Please Select One!'),
+            actions: [
+
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(mContext);
+                },
+                child: const Text(
+                  'Okay',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   moveForward({required String currentStageText}) {

@@ -25,7 +25,7 @@ class _GoalSelectionState extends State<GoalSelection> {
             child: PopScope(
               canPop: false,
               onPopInvoked: (isPoped) {
-                value.updateStage(isForward: false,mContext: context);
+                value.updateStage(isForward: false, mContext: context);
               },
               child: SafeArea(
                 child: Container(
@@ -38,7 +38,8 @@ class _GoalSelectionState extends State<GoalSelection> {
                         children: [
                           InkWell(
                             onTap: () {
-                              value.updateStage(isForward: false,mContext: context);
+                              value.updateStage(
+                                  isForward: false, mContext: context);
                             },
                             child: Image.asset(
                               fit: BoxFit.fitHeight,
@@ -93,7 +94,7 @@ class _GoalSelectionState extends State<GoalSelection> {
                       Expanded(flex: 1, child: value.returnSelectedScreen()),
                       InkWell(
                         onTap: () {
-                          value.updateStage(isForward: true,mContext: context);
+                          value.updateStage(isForward: true, mContext: context);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -177,61 +178,6 @@ class ScreenStep extends StatelessWidget {
   }
 }
 
-class GoalStep1Item extends StatelessWidget {
-  GoalStep1Item({super.key, required this.index, required this.notifier});
-
-  var index = 0;
-
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        notifier.updateStage1Items(index);
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-        height: MediaQuery.of(context).size.height * 0.12,
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: notifier.stage1Items[index].isSelected
-                    ? AssetImage("Assets/ic_selected_back.jpg")
-                    : AssetImage("Assets/ic_group_back.png"),
-                fit: BoxFit.cover,
-              )),
-          child: Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.all(22),
-                  margin: EdgeInsets.only(left: 0),
-                  child:
-                      SvgPicture.asset(notifier.stage1Items[index].imagePath)),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: Color(AppColors().titleTextColor)),
-                  child: Text(
-                    notifier.stage1Items[index].listTitle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class GoalStep1ItemCustom extends StatelessWidget {
   GoalStep1ItemCustom({super.key, required this.index, required this.notifier});
 
@@ -250,11 +196,8 @@ class GoalStep1ItemCustom extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.09,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20),
+          borderRadius: BorderRadius.circular(
+              20
           ),
           border: Border.all(
             width: 1,
@@ -296,9 +239,10 @@ class GoalStep1ItemCustom extends StatelessWidget {
                           bottomRight: Radius.circular(20),
                           topRight: Radius.circular(20)),
                     ),
-                    padding: const EdgeInsets.only(left: 10),
+
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         DefaultTextStyle(
                           style: TextStyle(
@@ -321,60 +265,6 @@ class GoalStep1ItemCustom extends StatelessWidget {
   }
 }
 
-/*class GoalStep1Item extends StatelessWidget {
-  GoalStep1Item({super.key, required this.index, required this.notifier});
-
-  var index = 0;
-
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        notifier.updateStage1Items(index);
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-        height: MediaQuery.of(context).size.height * 0.12,
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(50),
-              image: DecorationImage(
-                image: notifier.stage1Items[index].isSelected
-                    ? AssetImage("Assets/ic_selected_back.jpg")
-                    : AssetImage("Assets/ic_group_back.png"),
-                fit: BoxFit.cover,
-              )),
-          child: Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.all(22),
-                  margin: EdgeInsets.only(left: 0),
-                  child:
-                      SvgPicture.asset(notifier.stage1Items[index].imagePath)),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: Color(AppColors().titleTextColor)),
-                  child: Text(
-                    notifier.stage1Items[index].listTitle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}*/
 class GoalStep3ItemCustom extends StatelessWidget {
   GoalStep3ItemCustom({super.key, required this.index, required this.notifier});
 
@@ -393,11 +283,8 @@ class GoalStep3ItemCustom extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20),
+          borderRadius:BorderRadius.circular(
+              20
           ),
           border: Border.all(
             width: 1,
@@ -439,7 +326,7 @@ class GoalStep3ItemCustom extends StatelessWidget {
                           bottomRight: Radius.circular(20),
                           topRight: Radius.circular(20)),
                     ),
-                    padding: const EdgeInsets.only(left: 10),
+
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -493,11 +380,8 @@ class GoalStep4ItemCustom extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.09,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20),
+          borderRadius: BorderRadius.circular(
+          20
           ),
           border: Border.all(
             width: 1,
@@ -539,9 +423,10 @@ class GoalStep4ItemCustom extends StatelessWidget {
                           bottomRight: Radius.circular(20),
                           topRight: Radius.circular(20)),
                     ),
-                    padding: const EdgeInsets.only(left: 10),
+
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         DefaultTextStyle(
                           style: TextStyle(
@@ -564,7 +449,7 @@ class GoalStep4ItemCustom extends StatelessWidget {
   }
 }
 
-class GoalStep3Item extends StatelessWidget {
+/*class GoalStep3Item extends StatelessWidget {
   GoalStep3Item({super.key, required this.index, required this.notifier});
 
   var index = 0;
@@ -633,59 +518,4 @@ class GoalStep3Item extends StatelessWidget {
       ),
     );
   }
-}
-
-class GoalStep4Item extends StatelessWidget {
-  GoalStep4Item({super.key, required this.index, required this.notifier});
-
-  var index = 0;
-
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        notifier.updateStage4Items(index);
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-        height: MediaQuery.of(context).size.height * 0.12,
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(50),
-              image: DecorationImage(
-                image: notifier.stage4Items[index].isSelected
-                    ? AssetImage("Assets/ic_selected_back.jpg")
-                    : AssetImage("Assets/ic_group_back.png"),
-                fit: BoxFit.fitHeight,
-              )),
-          child: Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.01),
-                  child:
-                      SvgPicture.asset(notifier.stage4Items[index].imagePath)),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: Color(AppColors().titleTextColor)),
-                  child: Text(
-                    notifier.stage4Items[index].listTitle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+}*/
