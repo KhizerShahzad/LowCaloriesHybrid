@@ -42,10 +42,10 @@ class SignInSelectionScreen extends StatelessWidget {
             color: Colors.white,
             child: SafeArea(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 0, right: 0, top: 50),
+                    padding: const EdgeInsets.only(left: 0, right: 0, top: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +62,7 @@ class SignInSelectionScreen extends StatelessWidget {
                               DefaultTextStyle(
                                 style: TextStyle(
                                     fontWeight: FontWeight.w300,
-                                    fontSize: 30,
+                                    fontSize: 29,
                                     fontFamily: 'Futura',
                                     color: Color(AppColors().deppDark)),
                                 child: Text(
@@ -72,7 +72,7 @@ class SignInSelectionScreen extends StatelessWidget {
                               DefaultTextStyle(
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 65,
+                                    fontSize: 64,
                                     fontFamily: 'Futura',
                                     color: Color(AppColors().newGreen)),
                                 child: Text(
@@ -83,7 +83,7 @@ class SignInSelectionScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontFamily: 'Futura',
-                                    fontSize: 65,
+                                    fontSize: 64,
                                     color: Color(AppColors().deppDark)),
                                 child: Text(
                                   'Calories'.toUpperCase(),
@@ -103,17 +103,17 @@ class SignInSelectionScreen extends StatelessWidget {
                                   fit: BoxFit.fitHeight,
                                   'Assets/sign_in_small_dish.png',
                                   height:
-                                      MediaQuery.of(context).size.height * 0.28,
+                                      MediaQuery.of(context).size.height * 0.27,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.28,
+                                      MediaQuery.of(context).size.width * 0.27,
                                 ),
                               ],
                             ),
                             Image.asset(
                               fit: BoxFit.fitHeight,
                               'Assets/sign_in_option_big_food.jpg',
-                              height: MediaQuery.of(context).size.height * 0.6,
-                              width: MediaQuery.of(context).size.width * 0.6,
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.5,
                             )
                           ],
                         ),
@@ -128,7 +128,7 @@ class SignInSelectionScreen extends StatelessWidget {
                           Image.asset(
                             fit: BoxFit.fill,
                             'Assets/bottom_sign_in_selection.jpg',
-                            height: MediaQuery.of(context).size.height * 0.23,
+                            height: MediaQuery.of(context).size.height * 0.21,
                             width: MediaQuery.of(context).size.width * 1,
                           )
                         ],

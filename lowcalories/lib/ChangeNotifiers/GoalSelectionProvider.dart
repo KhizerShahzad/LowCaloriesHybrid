@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/GoalSelection.dart';
 import 'package:lowcalories/ChangeNotifiers/Views/SignInSelectionScreen.dart';
+import 'package:lowcalories/ChangeNotifiers/Views/Step1Screen.dart';
+import 'package:lowcalories/ChangeNotifiers/Views/Step2Screen.dart';
+import 'package:lowcalories/ChangeNotifiers/Views/Step3Screen.dart';
+import 'package:lowcalories/ChangeNotifiers/Views/Step4Screen.dart';
+import 'package:lowcalories/Models/UserProfile.dart';
+import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStrings.dart';
 import 'package:lowcalories/Models/ListModel.dart';
 
@@ -11,11 +15,11 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
   var stageText = AppStrings().goalScreen1Text;
   var stageLevel = 0;
   var stage1Complete = false;
-  var stage2Complete = true;
+  var stage2Complete = false;
   var stage3Complete = false;
   var stage4Complete = false;
   var stage1Selection = "";
-
+  UserProfile userProfile = UserProfile();
   List<ListItem> stage1Items = [
     ListItem("Assets/dinner.svg", "Lose Weight"),
     ListItem("Assets/weightgain.svg", "Gain Weight"),
@@ -62,11 +66,13 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
   }
 
   updateStage4Items(int index) {
-    for (var item in stage4Items) {
-      item.isSelected = false;
-    }
     stage4Items[index].isSelected = true;
     stage4Complete = true;
+    notifyListeners();
+  }
+
+  updateGender(String gender) {
+    userProfile.gender = gender;
     notifyListeners();
   }
 
@@ -78,19 +84,19 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       if (stageLevel == 0) {
         if (stage1Complete) {
           moveForward(currentStageText: AppStrings().goalScreen2Text);
-        }else{
+        } else {
           showNoItemSelected(mContext);
         }
       } else if (stageLevel == 1) {
         if (stage2Complete) {
           moveForward(currentStageText: AppStrings().goalScreen3Text);
-        }else{
+        } else {
           showNoItemSelected(mContext);
         }
       } else if (stageLevel == 2) {
         if (stage3Complete) {
           moveForward(currentStageText: AppStrings().goalScreen4Text);
-        }else{
+        } else {
           showNoItemSelected(mContext);
         }
       } else if (stageLevel == 3) {
@@ -102,8 +108,12 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             context: mContext,
             builder: (mContext) {
               return AlertDialog(
-                title: const Text('ALERT',style: TextStyle(fontSize: 20),),
-                content: const Text('Are you sure you want to move back?\nYour Progress will be lost!'),
+                title: const Text(
+                  'ALERT',
+                  style: TextStyle(fontSize: 20),
+                ),
+                content: const Text(
+                    'Are you sure you want to move back?\nYour Progress will be lost!'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -137,23 +147,68 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       }
     }
   }
-  showNoItemSelected(BuildContext mContext)
-  {
+
+  showNoItemSelected(BuildContext mContext) {
     showDialog(
         context: mContext,
         builder: (mContext) {
           return AlertDialog(
-            title: const Text('INFO',style: TextStyle(fontSize: 20),),
-            content: const Text('Please Select One!'),
+            contentPadding: EdgeInsets.symmetric(vertical: MediaQuery.of(mContext).size.height*0.013,horizontal: MediaQuery.of(mContext).size.width*0.03),
+            title: Text(
+              'Info',
+              style: TextStyle(
+                  fontSize: 23,
+                  color: Color(
+                    AppColors().popUpHeaderColor,
+                  ),
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w400),
+            ),
+            content:  Row
+              (
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:  EdgeInsets.only(left: MediaQuery.of(mContext).size.width*0.02),
+                  child: Text('Please Select One!',   style: TextStyle(
+                      fontSize: 14,
+                      color: Color(
+                        AppColors().popUpBodyTextColor,
+                      ),
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w400)),
+                ),
+              ],
+            ),
             actions: [
-
               TextButton(
                 onPressed: () {
                   Navigator.pop(mContext);
                 },
-                child: const Text(
+                child: Text(
+                  'Close',
+                  style: TextStyle(
+                      fontSize: 13,
+                      color: Color(
+                        AppColors().titleTextColor,
+                      ),
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(mContext);
+                },
+                child: Text(
                   'Okay',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                      fontSize: 13,
+                      color: Color(
+                        AppColors().newGreen,
+                      ),
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w400),
                 ),
               ),
             ],
@@ -199,7 +254,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         notifier: this,
       );
     } else if (stageLevel == 1) {
-      return Container();
+      return GoalStage2Screen(notifier: this);
     } else if (stageLevel == 2) {
       return GoalStage3List(
         items: stage3Items,
@@ -212,67 +267,5 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       );
     }
     return Container();
-  }
-}
-
-class GoalStage1List extends StatelessWidget {
-  GoalStage1List({super.key, required this.items, required this.notifier});
-
-  final List<ListItem> items;
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return GoalStep1ItemCustom(
-            index: index,
-            notifier: notifier,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class GoalStage3List extends StatelessWidget {
-  GoalStage3List({super.key, required this.items, required this.notifier});
-
-  final List<ListItem> items;
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return GoalStep3ItemCustom(
-          index: index,
-          notifier: notifier,
-        );
-      },
-    );
-  }
-}
-
-class GoalStage4List extends StatelessWidget {
-  GoalStage4List({super.key, required this.items, required this.notifier});
-
-  final List<ListItem> items;
-  GoalSelectionScreenNotifier notifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return GoalStep4ItemCustom(
-          index: index,
-          notifier: notifier,
-        );
-      },
-    );
   }
 }
