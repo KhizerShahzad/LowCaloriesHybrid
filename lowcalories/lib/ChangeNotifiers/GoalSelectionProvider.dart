@@ -25,6 +25,9 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     ListItem("Assets/weightgain.svg", "Gain Weight"),
     ListItem("Assets/maintainweight.svg", "Maintain Weight")
   ];
+  TextEditingController weightController = TextEditingController();
+  TextEditingController targetWeightController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
   List<ListItem> stage4Items = [
     ListItem("Assets/ic_fish.svg", "Fish"),
     ListItem("Assets/ic_meat.svg", "Meat"),
@@ -76,6 +79,11 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     notifyListeners();
   }
 
+  setHeight(String height) {
+    userProfile.height = height;
+    notifyListeners();
+  }
+
   updateStage({
     required bool isForward,
     required BuildContext mContext,
@@ -88,10 +96,29 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
           showNoItemSelected(mContext);
         }
       } else if (stageLevel == 1) {
-        if (stage2Complete) {
+        if (userProfile.gender.isNotEmpty &&
+            userProfile.dateOfBirth.isNotEmpty &&
+            weightController.text.toString().isNotEmpty &&
+            heightController.text.toString().isNotEmpty &&
+            targetWeightController.text.toString().isNotEmpty) {
+          userProfile.weight = weightController.text.toString();
+          userProfile.height = heightController.text.toString();
+          userProfile.targetWeight = targetWeightController.text.toString();
+          stage2Complete = true;
           moveForward(currentStageText: AppStrings().goalScreen3Text);
         } else {
-          showNoItemSelected(mContext);
+          if (userProfile.gender.isEmpty) {
+            showPrompt(mContext, 'Select Gender');
+          }else if (userProfile.dateOfBirth.isEmpty) {
+            showPrompt(mContext, 'Select Date of Birth');
+          } else if (weightController.text.toString().isEmpty) {
+            showPrompt(mContext, 'Enter Weight');
+          } else if (heightController.text.toString().isEmpty) {
+            showPrompt(mContext, 'Enter Height');
+          } else if (targetWeightController.text.toString().isEmpty) {
+            showPrompt(mContext, 'Enter Target Height');
+          }
+          stage2Complete = false;
         }
       } else if (stageLevel == 2) {
         if (stage3Complete) {
@@ -148,12 +175,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     }
   }
 
-  showNoItemSelected(BuildContext mContext) {
+  showPrompt(BuildContext mContext, String message) {
     showDialog(
         context: mContext,
         builder: (mContext) {
           return AlertDialog(
-            contentPadding: EdgeInsets.symmetric(vertical: MediaQuery.of(mContext).size.height*0.013,horizontal: MediaQuery.of(mContext).size.width*0.03),
+            contentPadding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(mContext).size.height * 0.013,
+                horizontal: MediaQuery.of(mContext).size.width * 0.03),
             title: Text(
               'Info',
               style: TextStyle(
@@ -164,19 +193,91 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                   fontFamily: "Roboto",
                   fontWeight: FontWeight.w400),
             ),
-            content:  Row
-              (
+            content: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(left: MediaQuery.of(mContext).size.width*0.02),
-                  child: Text('Please Select One!',   style: TextStyle(
-                      fontSize: 14,
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(mContext).size.width * 0.02),
+                  child: Text(message,
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Color(
+                            AppColors().popUpBodyTextColor,
+                          ),
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.w400)),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(mContext);
+                },
+                child: Text(
+                  'Close',
+                  style: TextStyle(
+                      fontSize: 13,
                       color: Color(
-                        AppColors().popUpBodyTextColor,
+                        AppColors().titleTextColor,
                       ),
                       fontFamily: "Roboto",
-                      fontWeight: FontWeight.w400)),
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(mContext);
+                },
+                child: Text(
+                  'Okay',
+                  style: TextStyle(
+                      fontSize: 13,
+                      color: Color(
+                        AppColors().newGreen,
+                      ),
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  showNoItemSelected(BuildContext mContext) {
+    showDialog(
+        context: mContext,
+        builder: (mContext) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(mContext).size.height * 0.013,
+                horizontal: MediaQuery.of(mContext).size.width * 0.03),
+            title: Text(
+              'Info',
+              style: TextStyle(
+                  fontSize: 23,
+                  color: Color(
+                    AppColors().popUpHeaderColor,
+                  ),
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w400),
+            ),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(mContext).size.width * 0.02),
+                  child: Text('Please Select One!',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Color(
+                            AppColors().popUpBodyTextColor,
+                          ),
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.w400)),
                 ),
               ],
             ),
@@ -224,6 +325,11 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     }
   }
 
+  updateDate({required String date}) {
+    userProfile.dateOfBirth = date;
+    notifyListeners();
+  }
+
   moveBackword({required String currentStageText}) {
     if (stageLevel > 0) {
       stageLevel = stageLevel - 1;
@@ -254,7 +360,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         notifier: this,
       );
     } else if (stageLevel == 1) {
-      return GoalStage2Screen(notifier: this);
+      return GoalStage2Stateful(notifier: this);
     } else if (stageLevel == 2) {
       return GoalStage3List(
         items: stage3Items,

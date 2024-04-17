@@ -11,6 +11,9 @@ class Constants {
   paddingFrontPoint3(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.03;
   }
+  paddingFrontPoint2(BuildContext context) {
+    return MediaQuery.of(context).size.width * 0.005;
+  }
   GoalSelectionTop(BuildContext context) {
     return  MediaQuery.of(context).size.height*0.012;
   }

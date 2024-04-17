@@ -5,5 +5,5 @@ class UserProfile {
   var dateOfBirth = "";
   var weight = "";
   var height = "";
-  var targetHeight = "";
+  var targetWeight = "";
 }
