@@ -135,6 +135,82 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             context: mContext,
             builder: (mContext) {
               return AlertDialog(
+                contentPadding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(mContext).size.height * 0.013,
+                    horizontal: MediaQuery.of(mContext).size.width * 0.03),
+                title: Text(
+                  'Info',
+                  style: TextStyle(
+                      fontSize: 23,
+                      color: Color(
+                        AppColors().popUpHeaderColor,
+                      ),
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w400),
+                ),
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(mContext).size.width * 0.02),
+                      child: Text( 'Are you sure you want to move back?\nYour Progress will be lost!',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Color(
+                                AppColors().popUpBodyTextColor,
+                              ),
+                              fontFamily: "Roboto",
+                              fontWeight: FontWeight.w400)),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        mContext,
+                        MaterialPageRoute(
+                            builder: (context) => SignInSelectionScreen()),
+
+                      );
+                    },
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Color(
+                            AppColors().newGreen,
+                          ),
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(mContext);
+                    },
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Color(
+                            AppColors().titleTextColor,
+                          ),
+                          fontFamily: "Roboto",
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              );
+            });
+
+
+/*
+        showDialog(
+            context: mContext,
+            builder: (mContext) {
+              return AlertDialog(
                 title: const Text(
                   'ALERT',
                   style: TextStyle(fontSize: 20),
@@ -148,8 +224,8 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                       Navigator.push(
                         mContext,
                         MaterialPageRoute(
-                            builder: (context) => SignInSelectionScreen()),
-                      );
+                            builder: (context) => SignInSelectionScreen()),);
+
                     },
                     child: const Text('Yes'),
                   ),
@@ -164,7 +240,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                   ),
                 ],
               );
-            });
+            });*/
       } else if (stageLevel == 1) {
         moveBackword(currentStageText: AppStrings().goalScreen1Text);
       } else if (stageLevel == 2) {
@@ -351,6 +427,11 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     stage4Complete = false;
     stage3Complete = false;
     stage1Complete = false;
+    stage2Complete=false;
+    userProfile=UserProfile();
+    weightController.text="";
+    heightController.text="";
+    targetWeightController.text="";
   }
 
   Widget returnSelectedScreen() {
