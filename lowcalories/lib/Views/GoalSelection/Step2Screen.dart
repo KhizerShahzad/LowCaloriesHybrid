@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lowcalories/Utills/Constants.dart';
+import 'package:lowcalories/Utills/AppSizes.dart';
 
 class GoalStage2Stateful extends StatefulWidget {
   GoalStage2Stateful({super.key, required this.notifier});
@@ -25,76 +25,82 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
-      child: Column(
-        children: [
-          TextStart(
-            lableText: "Gender",
-          ),
-          Row(
+    return Scaffold(
+
+      body: SingleChildScrollView(
+        child: Container(
+          margin:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+          child: Column(
             children: [
-              Container(
-                  margin: EdgeInsets.only(right: 5),
-                  child: GenderSelectionWidget(
+              TextStart(
+                lableText: "Gender",
+              ),
+              Row(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(right: 5),
+                      child: GenderSelectionWidget(
+                          notifier: notifier,
+                          gender: "Male",
+                          leadingIcon: "Assets/male_gender.svg")),
+                  Container(
+                      margin: EdgeInsets.only(left: 5),
+                      child: GenderSelectionWidget(
+                        notifier: notifier,
+                        gender: "Female",
+                        leadingIcon: "Assets/female_gender.svg",
+                      ))
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.03),
+                child: Column(
+                  children: [
+                    TextStart(
+                      lableText: "Physical Detail",
+                    ),
+                    DateOfBirth(
+                        notifier: notifier,
+                        lableText: "DOB",
+                        imagePath: "Assets/dob.svg"),
+                    GoalInputText(
                       notifier: notifier,
-                      gender: "Male",
-                      leadingIcon: "Assets/male_gender.svg")),
-              Container(
-                  margin: EdgeInsets.only(left: 5),
-                  child: GenderSelectionWidget(
-                    notifier: notifier,
-                    gender: "Female",
-                    leadingIcon: "Assets/female_gender.svg",
-                  ))
+                      imagePath: "Assets/weightloss.svg",
+                      fieldHint: "Weight",
+                      fieldText: notifier.userProfile.weight.isEmpty
+                          ? ""
+                          : notifier.userProfile.weight,
+                      controller: notifier.weightController,
+                      fieldUnit: "KG",
+                    ),
+                    GoalInputText(
+                      notifier: notifier,
+                      imagePath: "Assets/length.svg",
+                      fieldHint: "Height",
+                      fieldText: notifier.userProfile.height.isEmpty
+                          ? ""
+                          : notifier.userProfile.height,
+                      controller: notifier.heightController,
+                      fieldUnit: "CM",
+                    ),
+                    GoalInputText(
+                      notifier: notifier,
+                      imagePath: "Assets/weightgain.svg",
+                      fieldHint: "Target Weight",
+                      fieldText: notifier.userProfile.targetWeight.isEmpty
+                          ? ""
+                          : notifier.userProfile.targetWeight,
+                      controller: notifier.targetWeightController,
+                      fieldUnit: "KG",
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.012),
-            child: Column(
-              children: [
-                TextStart(
-                  lableText: "Physical Detail",
-                ),
-                DateOfBirth(
-                    notifier: notifier,
-                    lableText: "DOB",
-                    imagePath: "Assets/dob.svg"),
-                GoalInputText(
-                  notifier: notifier,
-                  imagePath: "Assets/weightloss.svg",
-                  fieldHint: "Weight",
-                  fieldText: notifier.userProfile.weight.isEmpty
-                      ? ""
-                      : notifier.userProfile.weight,
-                  controller: notifier.weightController,
-                  fieldUnit: "KG",
-                ),
-                GoalInputText(
-                  notifier: notifier,
-                  imagePath: "Assets/length.svg",
-                  fieldHint: "Height",
-                  fieldText: notifier.userProfile.height.isEmpty
-                      ? ""
-                      : notifier.userProfile.height,
-                  controller: notifier.heightController,
-                  fieldUnit: "CM",
-                ),
-                GoalInputText(
-                  notifier: notifier,
-                  imagePath: "Assets/weightgain.svg",
-                  fieldHint: "Target Weight",
-                  fieldText: notifier.userProfile.targetWeight.isEmpty
-                      ? ""
-                      : notifier.userProfile.targetWeight,
-                  controller: notifier.targetWeightController,
-                  fieldUnit: "KG",
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -168,9 +174,9 @@ class GenderSelectionWidget extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: Constants().paddingFrontPoint3(context)),
+                              left: AppSizes().paddingWidthPoint3(context)),
                           child: DefaultTextStyle(
-                            style:  TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
                                 fontFamily: 'Inter',
@@ -257,9 +263,9 @@ class DateOfBirth extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: Constants().paddingFrontPoint3(context)),
+                              left: AppSizes().paddingWidthPoint3(context)),
                           child: DefaultTextStyle(
-                            style:  TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
                                 fontFamily: 'Inter',
@@ -303,7 +309,7 @@ class GoalInputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: Constants().spaceBetweenItems(context)),
+      margin: EdgeInsets.only(top: AppSizes().spaceBetweenItems(context)),
       height: MediaQuery.of(context).size.height * 0.09,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -352,7 +358,7 @@ class GoalInputText extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                            left: Constants().paddingFrontPoint2(context)),
+                            left: AppSizes().paddingWidthPoint2(context)),
                         child: DecoratedTextField(
                             fieldHint, "", controller, fieldUnit),
                       ),
@@ -387,7 +393,8 @@ class DecoratedTextField extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.08,
               width: MediaQuery.of(context).size.width * 0.6,
               child: Padding(
-                padding: EdgeInsets.only(left: Constants().paddingFrontPoint2(context)),
+                padding: EdgeInsets.only(
+                    left: AppSizes().paddingWidthPoint2(context)),
                 child: TextField(
                   controller: controller,
                   style: TextStyle(
@@ -398,11 +405,11 @@ class DecoratedTextField extends StatelessWidget {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: fieldHint,
-                    hintStyle:  TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      fontFamily: 'Inter',
-                      color: Color(AppColors().titleTextColor)),
+                    hintStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        color: Color(AppColors().titleTextColor)),
                   ),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
@@ -421,7 +428,8 @@ class DecoratedTextField extends StatelessWidget {
           ],
         ),
         Padding(
-          padding:  EdgeInsets.only(right: Constants().paddingFrontPoint3(context)),
+          padding:
+              EdgeInsets.only(right: AppSizes().paddingWidthPoint3(context)),
           child: Text(
             fieldUnit,
             style: TextStyle(

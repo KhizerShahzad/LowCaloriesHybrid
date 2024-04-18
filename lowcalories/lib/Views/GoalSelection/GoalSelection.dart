@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
-import 'package:lowcalories/Utills/Constants.dart';
+import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:provider/provider.dart';
 
 class GoalSelection extends StatefulWidget {
@@ -94,7 +94,7 @@ class _GoalSelectionState extends State<GoalSelection> {
                         ),
                       ),
                       Expanded(flex: 1, child: Padding(
-                        padding:  EdgeInsets.only(top: Constants().GoalSelectionTop(context)),
+                        padding:  EdgeInsets.only(top: AppSizes().GoalSelectionTop(context)),
                         child: value.returnSelectedScreen(),
                       )),
                       InkWell(
@@ -158,27 +158,30 @@ class ScreenStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            border: Border.all(width: 5.0, color: Colors.white),
-          ),
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.01,
-            width: MediaQuery.of(context).size.width * 0.19,
+    return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
+      child: Row(
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              border: Border.all(width: 5.0, color: Colors.white),
+            ),
             child: Container(
-              decoration: BoxDecoration(
-                  color: Color(isDone
-                      ? AppColors().newGreen
-                      : AppColors().deppDark10Opacity),
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(50)),
+              height: MediaQuery.of(context).size.height * 0.01,
+              width: MediaQuery.of(context).size.width * 0.20,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(isDone
+                        ? AppColors().newGreen
+                        : AppColors().deppDark10Opacity),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(50)),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

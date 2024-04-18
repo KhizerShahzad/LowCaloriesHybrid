@@ -7,7 +7,7 @@ import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Models/ListModel.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lowcalories/Utills/Constants.dart';
+import 'package:lowcalories/Utills/AppSizes.dart';
 class GoalStage3List extends StatelessWidget {
   GoalStage3List({super.key, required this.items, required this.notifier});
 
@@ -41,7 +41,7 @@ class GoalStep3ItemCustom extends StatelessWidget {
         notifier.updateStage3Items(index);
       },
       child: Container(
-        margin: EdgeInsets.only(top:Constants().spaceBetweenItems(context)),
+        margin: EdgeInsets.only(top:AppSizes().spaceBetweenItems(context)),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -87,7 +87,7 @@ class GoalStep3ItemCustom extends StatelessWidget {
                           topRight: Radius.circular(20)),
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.only(left: Constants().paddingFrontPoint3(context)),
+                      padding:  EdgeInsets.only(left: AppSizes().paddingWidthPoint3(context)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,

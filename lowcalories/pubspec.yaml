@@ -69,8 +69,7 @@ flutter:
     - family: Inter
       fonts:
         - asset: fonts/inter_variable_font_sln.ttf
-        - asset: fonts/inter_variable_font_sln.ttf
-          weight: 400
+          weight: 500
         - asset: fonts/inter_variable_font_sln.ttf
           weight: 400
 

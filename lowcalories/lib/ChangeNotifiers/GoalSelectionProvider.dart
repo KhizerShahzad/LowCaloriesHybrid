@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/SignInSelectionScreen.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/Step1Screen.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/Step2Screen.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/Step3Screen.dart';
-import 'package:lowcalories/ChangeNotifiers/Views/Step4Screen.dart';
+import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
+import 'package:lowcalories/Views/SignInSelectionScreen.dart';
+import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
+import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
+import 'package:lowcalories/Views/GoalSelection/Step3Screen.dart';
+import 'package:lowcalories/Views/GoalSelection/Step4Screen.dart';
+
+
 import 'package:lowcalories/Models/UserProfile.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStrings.dart';
 import 'package:lowcalories/Models/ListModel.dart';
+
+import '../Views/GoalSelection/Step2Screen.dart';
 
 class GoalSelectionScreenNotifier with ChangeNotifier {
   var stageText = AppStrings().goalScreen1Text;
@@ -109,7 +114,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         } else {
           if (userProfile.gender.isEmpty) {
             showPrompt(mContext, 'Select Gender');
-          }else if (userProfile.dateOfBirth.isEmpty) {
+          } else if (userProfile.dateOfBirth.isEmpty) {
             showPrompt(mContext, 'Select Date of Birth');
           } else if (weightController.text.toString().isEmpty) {
             showPrompt(mContext, 'Enter Weight');
@@ -127,7 +132,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
           showNoItemSelected(mContext);
         }
       } else if (stageLevel == 3) {
-        if (stage4Complete) {}
+        if (stage4Complete) {
+
+          Navigator.push(
+            mContext,
+            MaterialPageRoute(
+                builder: (context) => DashBoard()),
+          );
+        }
       }
     } else {
       if (stageLevel == 0) {
@@ -135,8 +147,10 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             context: mContext,
             builder: (mContext) {
               return AlertDialog(
+                buttonPadding:EdgeInsets.only(
+                bottom: 0) ,
                 contentPadding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(mContext).size.height * 0.013,
+                    vertical: MediaQuery.of(mContext).size.height * 0.005,
                     horizontal: MediaQuery.of(mContext).size.width * 0.03),
                 title: Text(
                   'Info',
@@ -148,31 +162,35 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                       fontFamily: "Roboto",
                       fontWeight: FontWeight.w400),
                 ),
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(mContext).size.width * 0.02),
-                      child: Text( 'Are you sure you want to move back?\nYour Progress will be lost!',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Color(
-                                AppColors().popUpBodyTextColor,
-                              ),
-                              fontFamily: "Roboto",
-                              fontWeight: FontWeight.w400)),
-                    ),
-                  ],
+                content: Container(
+                  height: MediaQuery.of(mContext).size.height*0.05,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(mContext).size.width * 0.02),
+                        child: Text(
+                            'Are you sure you want to move back?\nYour Progress will be lost!',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Color(
+                                  AppColors().popUpBodyTextColor,
+                                ),
+                                fontFamily: "Roboto",
+                                fontWeight: FontWeight.w400)),
+                      ),
+                    ],
+                  ),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () {
+                      clearAllSelection();
                       Navigator.push(
                         mContext,
                         MaterialPageRoute(
                             builder: (context) => SignInSelectionScreen()),
-
                       );
                     },
                     child: Text(
@@ -204,43 +222,6 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                 ],
               );
             });
-
-
-/*
-        showDialog(
-            context: mContext,
-            builder: (mContext) {
-              return AlertDialog(
-                title: const Text(
-                  'ALERT',
-                  style: TextStyle(fontSize: 20),
-                ),
-                content: const Text(
-                    'Are you sure you want to move back?\nYour Progress will be lost!'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      clearAllSelection();
-                      Navigator.push(
-                        mContext,
-                        MaterialPageRoute(
-                            builder: (context) => SignInSelectionScreen()),);
-
-                    },
-                    child: const Text('Yes'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(mContext);
-                    },
-                    child: const Text(
-                      'No',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                ],
-              );
-            });*/
       } else if (stageLevel == 1) {
         moveBackword(currentStageText: AppStrings().goalScreen1Text);
       } else if (stageLevel == 2) {
@@ -256,6 +237,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         context: mContext,
         builder: (mContext) {
           return AlertDialog(
+            backgroundColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(mContext).size.height * 0.013,
                 horizontal: MediaQuery.of(mContext).size.width * 0.03),
@@ -274,7 +256,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(mContext).size.width * 0.02),
+                      left: MediaQuery.of(mContext).size.width * 0.023),
                   child: Text(message,
                       style: TextStyle(
                           fontSize: 14,
@@ -427,11 +409,11 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     stage4Complete = false;
     stage3Complete = false;
     stage1Complete = false;
-    stage2Complete=false;
-    userProfile=UserProfile();
-    weightController.text="";
-    heightController.text="";
-    targetWeightController.text="";
+    stage2Complete = false;
+    userProfile = UserProfile();
+    weightController.text = "";
+    heightController.text = "";
+    targetWeightController.text = "";
   }
 
   Widget returnSelectedScreen() {

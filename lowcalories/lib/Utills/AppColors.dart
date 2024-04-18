@@ -10,8 +10,10 @@ class AppColors {
 
   var deppDark = 0xff1E2327;
   var titleTextColor = 0xff212534;
+  var titleTextColor50opacity = 0xff80212534;
   var deppDark10Opacity = 0xff1A1E2327;
   var newGreen = 0xff43C15F;
+  var lightGreen = 0xffD9F3DF;
   var lightGreY4Opacity = 0xff0A212534;
   var lightGreY60Opacity = 0xff99212534;
   var blackHeadText = 0xff868E9673;
