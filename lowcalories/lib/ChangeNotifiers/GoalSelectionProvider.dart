@@ -30,6 +30,12 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     ListItem("Assets/weightgain.svg", "Gain Weight"),
     ListItem("Assets/maintainweight.svg", "Maintain Weight")
   ];
+  List<ListItem> mealTypeList = [
+    ListItem("","Full\nDay"),
+    ListItem("", "BreakFast\n+ Lunch"),
+    ListItem("", "Lunch +\nDinner"),
+    ListItem("", "BreakFast +\nDinner"),
+  ];
   TextEditingController weightController = TextEditingController();
   TextEditingController targetWeightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
@@ -61,6 +67,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     }
     stage1Items[index].isSelected = true;
     stage1Complete = true;
+    notifyListeners();
+  }
+
+  updateDashboardMealSelection(int index) {
+    for (var item in mealTypeList) {
+      item.isSelected = false;
+    }
+    mealTypeList[index].isSelected = true;
     notifyListeners();
   }
 
@@ -231,6 +245,9 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       }
     }
   }
+
+
+
 
   showPrompt(BuildContext mContext, String message) {
     showDialog(

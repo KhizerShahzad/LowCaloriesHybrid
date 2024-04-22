@@ -17,6 +17,14 @@ class AppStyles {
         fontFamily: 'Inter',
         color: Color(AppColors().titleTextColor));
   }
+  fontInterItalic(double fontSize) {
+    return  TextStyle(
+      fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.w500,
+        fontSize: fontSize,
+        fontFamily: 'Inter',
+        color: Color(AppColors().titleTextColor));
+  }
   fontInterBold(double fontSize) {
     return  TextStyle(
         fontWeight: FontWeight.bold,
