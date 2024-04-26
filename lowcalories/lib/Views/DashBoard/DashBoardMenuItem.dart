@@ -4,26 +4,29 @@ import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
 
 class DashboarMenuItem extends StatelessWidget {
-  DashboarMenuItem({super.key, required this.itemIndex,required this.notifier});
+  DashboarMenuItem(
+      {super.key, required this.itemIndex, required this.notifier});
 
-
-  var itemIndex=0;
+  var itemIndex = 0;
   GoalSelectionScreenNotifier notifier;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()
-      {
-notifier.updateDashboardMealSelection(itemIndex);
+      onTap: () {
+        notifier.updateDashboardMealSelection(itemIndex);
       },
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.3,
-        width: MediaQuery.of(context).size.width * 0.35,
-        margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.02),
+        height: MediaQuery.of(context).size.height * 0.1,
+        width: MediaQuery.of(context).size.width * 0.4,
+        margin:
+            EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.02),
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
-            color: notifier.mealTypeList[itemIndex].isSelected ?  Color(AppColors().newGreen):Color(AppColors().itemShadow),
+            color: notifier.mealTypeList[itemIndex].isSelected
+                ? Color(AppColors().newGreen)
+                : Color(AppColors().itemShadow),
             style: BorderStyle.solid,
           ),
           shape: BoxShape.rectangle,
@@ -36,7 +39,6 @@ notifier.updateDashboardMealSelection(itemIndex);
         child: Center(
           child: Container(
             decoration: BoxDecoration(
-
               image: DecorationImage(
                 image: AssetImage("Assets/dinner_background_menu.png"),
                 fit: BoxFit.fill,
@@ -46,7 +48,7 @@ notifier.updateDashboardMealSelection(itemIndex);
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: Colors.white),
               child: Padding(
-                padding:  EdgeInsets.all(30),
+                padding: EdgeInsets.all(30),
                 child: DefaultTextStyle(
                   style: AppStyles().fontInterItalic(14),
                   child: Text(notifier.mealTypeList[itemIndex].listTitle),

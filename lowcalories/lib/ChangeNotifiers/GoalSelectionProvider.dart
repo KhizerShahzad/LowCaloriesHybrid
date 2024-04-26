@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lowcalories/Models/CalorieItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
 import 'package:lowcalories/Views/SignInSelectionScreen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step3Screen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step4Screen.dart';
-
 
 import 'package:lowcalories/Models/UserProfile.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
@@ -31,7 +31,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     ListItem("Assets/maintainweight.svg", "Maintain Weight")
   ];
   List<ListItem> mealTypeList = [
-    ListItem("","Full\nDay"),
+    ListItem("", "Full\nDay"),
     ListItem("", "BreakFast\n+ Lunch"),
     ListItem("", "Lunch +\nDinner"),
     ListItem("", "BreakFast +\nDinner"),
@@ -47,6 +47,28 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     ListItem("Assets/ic_eggs.svg", "Eggs"),
     ListItem("Assets/ic_nuts.svg", "Nuts"),
     ListItem("Assets/ic_spices.svg", "Spices"),
+  ];
+
+  List<ListItem> caloriesList = [
+    ListItem("", "1100-1300"),
+    ListItem("", "1300-1500"),
+    ListItem("", "1500-1600"),
+    ListItem("", "1600-1800"),
+    ListItem("", "1800-2000"),
+    ListItem("", "2000-2200"),
+  ];
+  List<CalorieBreakdownItem> calorieBreakdownItem = [
+    CalorieBreakdownItem("Proteins", "35-55g"),
+    CalorieBreakdownItem("Carbs", "65-70g"),
+    CalorieBreakdownItem("Fats", "12-46g")
+  ];
+  List<ListItem> deliveryDaysList = [
+    ListItem("", "7"),
+    ListItem("", "5"),
+    ListItem("", "10"),
+    ListItem("", "20"),
+    ListItem("", "30"),
+    ListItem("", "40"),
   ];
   List<ListItem> stage3Items = [
     ListItem("Assets/ic_not_active.svg", "Not active at all",
@@ -75,6 +97,22 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       item.isSelected = false;
     }
     mealTypeList[index].isSelected = true;
+    notifyListeners();
+  }
+
+  updateCalorieRangeSelection(int index) {
+    for (var item in caloriesList) {
+      item.isSelected = false;
+    }
+    caloriesList[index].isSelected = true;
+    notifyListeners();
+  }
+
+  updateDeliveryDaysSelection(int index) {
+    for (var item in deliveryDaysList) {
+      item.isSelected = false;
+    }
+    deliveryDaysList[index].isSelected = true;
     notifyListeners();
   }
 
@@ -147,11 +185,9 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         }
       } else if (stageLevel == 3) {
         if (stage4Complete) {
-
           Navigator.push(
             mContext,
-            MaterialPageRoute(
-                builder: (context) => DashBoard()),
+            MaterialPageRoute(builder: (context) => DashBoard()),
           );
         }
       }
@@ -161,8 +197,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             context: mContext,
             builder: (mContext) {
               return AlertDialog(
-                buttonPadding:EdgeInsets.only(
-                bottom: 0) ,
+                buttonPadding: EdgeInsets.only(bottom: 0),
                 contentPadding: EdgeInsets.symmetric(
                     vertical: MediaQuery.of(mContext).size.height * 0.005,
                     horizontal: MediaQuery.of(mContext).size.width * 0.03),
@@ -177,7 +212,7 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                       fontWeight: FontWeight.w400),
                 ),
                 content: Container(
-                  height: MediaQuery.of(mContext).size.height*0.05,
+                  height: MediaQuery.of(mContext).size.height * 0.05,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -245,9 +280,6 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       }
     }
   }
-
-
-
 
   showPrompt(BuildContext mContext, String message) {
     showDialog(

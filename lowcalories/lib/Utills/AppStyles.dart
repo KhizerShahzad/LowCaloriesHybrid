@@ -11,26 +11,58 @@ class AppStyles {
   AppStyles._privateConstructor();
 
   fontInter500(double fontSize) {
-    return  TextStyle(
+    return TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: fontSize,
         fontFamily: 'Inter',
         color: Color(AppColors().titleTextColor));
   }
-  fontInterItalic(double fontSize) {
-    return  TextStyle(
-      fontStyle: FontStyle.italic,
+  fontRobotoWeight400(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: fontSize,
+        fontFamily: 'Roboto',
+        color: Color(AppColors().titleTextColor));
+  }
+
+  fontInter500Color(double fontSize, Color textColor) {
+    return TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: fontSize,
         fontFamily: 'Inter',
-        color: Color(AppColors().titleTextColor));
+        color: textColor);
   }
-  fontInterBold(double fontSize) {
-    return  TextStyle(
+
+  fontInterBoldColor(double fontSize, Color textColor) {
+    return TextStyle(
         fontWeight: FontWeight.bold,
+        fontSize: fontSize,
+        fontFamily: 'Inter',
+        color: textColor);
+  }
+
+  fontInter400(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: fontSize,
+        fontFamily: 'Inter',
+        color: textColor);
+  }
+
+  fontInterItalic(double fontSize) {
+    return TextStyle(
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.w500,
         fontSize: fontSize,
         fontFamily: 'Inter',
         color: Color(AppColors().titleTextColor));
   }
 
+  fontInterBold(double fontSize) {
+    return TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: fontSize,
+        fontFamily: 'Inter',
+        color: Color(AppColors().titleTextColor));
+  }
 }

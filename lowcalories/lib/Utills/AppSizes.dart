@@ -23,4 +23,7 @@ class AppSizes {
   spaceBetweenItems(BuildContext context) {
     return  MediaQuery.of(context).size.height*0.019;
   }
+  spaceBetweenItemsHorizontal(BuildContext context) {
+    return  MediaQuery.of(context).size.width*0.019;
+  }
 }
