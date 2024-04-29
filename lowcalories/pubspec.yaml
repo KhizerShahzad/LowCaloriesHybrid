@@ -83,7 +83,10 @@ flutter:
       fonts:
         - asset: fonts/roboto.ttf
           weight: 400
-
+        - asset: fonts/roboto.ttf
+          weight: 500
+        - asset: fonts/roboto.ttf
+          weight: 300
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

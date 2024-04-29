@@ -24,4 +24,5 @@ class AppColors {
   var itemBack = 0xffF6F6F7;
   var black4transparent = 0xff0A2125340A;
   var grey85transparent = 0xffD9212534;
+  var lightGrey = 0xffF1F3F5;
 }

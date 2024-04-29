@@ -24,6 +24,27 @@ class AppStyles {
         fontFamily: 'Roboto',
         color: Color(AppColors().titleTextColor));
   }
+  fontRobotoWeight500(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: fontSize,
+        fontFamily: 'Roboto',
+        color: Color(AppColors().titleTextColor));
+  }
+  fontRobotoWeightBold(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: fontSize,
+        fontFamily: 'Roboto',
+        color: Color(AppColors().titleTextColor));
+  }
+  fontRobotoWeight300(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.w300,
+        fontSize: fontSize,
+        fontFamily: 'Roboto',
+        color: Color(AppColors().titleTextColor));
+  }
 
   fontInter500Color(double fontSize, Color textColor) {
     return TextStyle(
