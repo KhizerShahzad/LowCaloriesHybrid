@@ -7,6 +7,7 @@ import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
+import 'package:lowcalories/Utills/CheckOutClickInterface.dart';
 import 'package:lowcalories/Views/DashBoard/CalorieBreakDownItem.dart';
 import 'package:lowcalories/Views/DashBoard/CalorieItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoardMenuItem.dart';
@@ -288,16 +289,19 @@ class DashBoard extends StatelessWidget {
             ],
           ),
         ),
-        PriceShow()
+        PriceShow("Dashboard")
       ]),
     );
   }
 }
 
-class PriceShow extends StatelessWidget {
-  const PriceShow({
+class PriceShow extends StatelessWidget implements CheckOutButtonListner {
+  PriceShow(
+    this.screen, {
     super.key,
   });
+
+  String screen = "";
 
   @override
   Widget build(BuildContext context) {
@@ -387,10 +391,7 @@ class PriceShow extends StatelessWidget {
                       vertical: MediaQuery.of(context).size.height * 0.01),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => YourMealPlan()),
-                      );
+                      this.onCheckoutClick(context, screen);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -426,5 +427,15 @@ class PriceShow extends StatelessWidget {
             )),
       ],
     );
+  }
+
+  @override
+  onCheckoutClick(BuildContext context, String type) {
+    if (type == "Dashboard") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => YourMealPlan()),
+      );
+    }
   }
 }

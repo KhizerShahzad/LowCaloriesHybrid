@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lowcalories/Models/CalorieItem.dart';
+import 'package:lowcalories/Models/MealItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
 import 'package:lowcalories/Views/SignInSelectionScreen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
@@ -81,6 +82,16 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         listSubTitle: "Exercise 5-6 times/week"),
     ListItem("Assets/ic_athlete.svg", "I am an Athlete",
         listSubTitle: "Exercise 6-7 times/week")
+  ];
+  List<MealItem> mealDummyItems = [
+    MealItem("Assets/shrimpSandwich.png","Breakfast","Shrimp Sandwich","20",
+        "30","50","60"),
+    MealItem("Assets/shrimpSandwich.png","AfterNoon","Beetroot Salad","20",
+        "30","50","60"),
+    MealItem("Assets/shrimpSandwich.png","Lunch","Fettucine Pasta","20",
+        "30","50","60"),
+    MealItem("Assets/shrimpSandwich.png","Dinner","Biryani","20",
+        "30","50","60")
   ];
 
   updateStage1Items(int index) {

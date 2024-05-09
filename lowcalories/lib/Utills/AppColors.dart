@@ -16,7 +16,9 @@ class AppColors {
   var backgroundGrey = 0xffF8F9FA;
   var lightGreen = 0xffD9F3DF;
   var lightGreenDays = 0xffA7E7B5;
+  var lightGreY3Opacity = 0xff4D212534;
   var lightGreY4Opacity = 0xff0A212534;
+  var lightGreY54pacity = 0xff8A212534;
   var lightGreY60Opacity = 0xff99212534;
   var lightGreY15Opacity = 0xff26212534;
   var blackHeadText = 0xff868E9673;
