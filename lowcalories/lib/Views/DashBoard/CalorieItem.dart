@@ -24,7 +24,7 @@ class CalorieItem extends StatelessWidget {
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.only(topRight: Radius.circular(35),bottomRight:  Radius.circular(35),topLeft: Radius.circular(7),bottomLeft:  Radius.circular(7)  ),
-              color: Color(AppColors().black4transparent),
+              color: Color(AppColors().lightGrey),
               border: Border.all(
                 width: 2,
                 color: notifier.caloriesList[itemIndex].isSelected

@@ -11,6 +11,7 @@ import 'package:lowcalories/Views/DashBoard/CalorieBreakDownItem.dart';
 import 'package:lowcalories/Views/DashBoard/CalorieItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoardMenuItem.dart';
 import 'package:lowcalories/Views/DashBoard/DeliverySelectorItem.dart';
+import 'package:lowcalories/Views/DashBoard/YourMealPlan.dart';
 import 'package:provider/provider.dart';
 
 class DashBoard extends StatelessWidget {
@@ -306,8 +307,8 @@ class PriceShow extends StatelessWidget {
         Container(
             height: MediaQuery.of(context).size.height * 0.2,
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.03),
+            margin:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
             decoration: BoxDecoration(
               color: Color(AppColors().lightGrey),
               shape: BoxShape.rectangle,
@@ -384,34 +385,41 @@ class PriceShow extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * 0.02,
                       vertical: MediaQuery.of(context).size.height * 0.01),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Color(AppColors().newGreen),
-                            border: Border.all(
-                              color:
-                                  const Color.fromARGB(225, 222, 226, 230),
-                              width: 2,
-                              style: BorderStyle.solid,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => YourMealPlan()),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Color(AppColors().newGreen),
+                              border: Border.all(
+                                color: const Color.fromARGB(225, 222, 226, 230),
+                                width: 2,
+                                style: BorderStyle.solid,
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: DefaultTextStyle(
-                              style: AppStyles()
-                                  .fontInter500Color(16, Colors.white),
-                              child: Text("Checkout"),
+                            child: Center(
+                              child: DefaultTextStyle(
+                                style: AppStyles()
+                                    .fontInter500Color(16, Colors.white),
+                                child: Text("Checkout"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

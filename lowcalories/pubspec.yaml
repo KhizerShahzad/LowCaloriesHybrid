@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   provider: ^6.1.2
+  intl: ^0.19.0
+  syncfusion_flutter_gauges: ^25.1.42
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +72,8 @@ flutter:
       fonts:
         - asset: fonts/inter_variable_font_sln.ttf
           weight: 500
+        - asset: fonts/inter_variable_font_sln.ttf
+          weight: 700
         - asset: fonts/inter_variable_font_sln.ttf
           weight: 400
 

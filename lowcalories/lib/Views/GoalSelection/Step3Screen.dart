@@ -42,7 +42,7 @@ class GoalStep3ItemCustom extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(top:AppSizes().spaceBetweenItems(context)),
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.09,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

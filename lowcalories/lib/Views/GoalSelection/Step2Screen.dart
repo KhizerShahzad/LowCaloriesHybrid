@@ -310,7 +310,7 @@ class GoalInputText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: AppSizes().spaceBetweenItems(context)),
-      height: MediaQuery.of(context).size.height * 0.09,
+      height: MediaQuery.of(context).size.height * 0.085,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -410,9 +410,9 @@ class DecoratedTextField extends StatelessWidget {
                         fontSize: 16,
                         fontFamily: 'Inter',
                         color: Color(AppColors().titleTextColor)),
-                  ),
+                  ),keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                    FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
                     TextInputFormatter.withFunction((oldValue, newValue) {
                       final text = newValue.text;
                       return text.isEmpty
@@ -473,8 +473,8 @@ handleClick(
     showDatePicker(
       context: mContext,
       firstDate: DateTime(1980),
-      lastDate: DateTime.fromMillisecondsSinceEpoch(1638592424384),
-      initialDate: DateTime.fromMillisecondsSinceEpoch(1638592424384),
+      lastDate: DateTime.now(),
+      initialDate: DateTime.now(),
       initialEntryMode: DatePickerEntryMode.calendarOnly,
     ).then((value) => {
           if (value != null)
