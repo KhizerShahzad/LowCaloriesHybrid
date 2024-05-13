@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
+import 'package:lowcalories/Utills/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
+import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
+import 'package:lowcalories/Views/SignUp/SignUpScreen.dart';
 import 'package:provider/provider.dart';
 
 class GoalSelection extends StatefulWidget {
@@ -16,7 +18,8 @@ class GoalSelection extends StatefulWidget {
   State<GoalSelection> createState() => _GoalSelectionState();
 }
 
-class _GoalSelectionState extends State<GoalSelection> {
+class _GoalSelectionState extends State<GoalSelection>
+    implements AppBarClickInterface {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -31,40 +34,14 @@ class _GoalSelectionState extends State<GoalSelection> {
               },
               child: SafeArea(
                 child: Container(
-                  margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+                  margin: EdgeInsets.only(top: 20, right: 15, left: 15),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              value.updateStage(
-                                  isForward: false, mContext: context);
-                            },
-                            child: Image.asset(
-                              fit: BoxFit.fitHeight,
-                              'Assets/customBack.jpg',
-                              height: 55,
-                              width: 55,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: DefaultTextStyle(
-                              style: TextStyle(
-                                  color: Color(AppColors().deppDark),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 22,
-                                  fontFamily: 'Inter'),
-                              child: Text(
-                                value.stageText,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                      AppBarWithArrow(
+                          appBarText: value.stageText,
+                          appBarClickInterface: this,
+                          screenName: "",
+                          notifier: value),
                       Container(
                         margin: EdgeInsets.only(
                             top: MediaQuery.of(context).size.height * 0.02),
@@ -93,10 +70,13 @@ class _GoalSelectionState extends State<GoalSelection> {
                           ],
                         ),
                       ),
-                      Expanded(flex: 1, child: Padding(
-                        padding:  EdgeInsets.only(top: AppSizes().GoalSelectionTop(context)),
-                        child: value.returnSelectedScreen(),
-                      )),
+                      Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: AppSizes().GoalSelectionTop(context)),
+                            child: value.returnSelectedScreen(),
+                          )),
                       InkWell(
                         onTap: () {
                           value.updateStage(isForward: true, mContext: context);
@@ -149,6 +129,12 @@ class _GoalSelectionState extends State<GoalSelection> {
       ),
     );
   }
+
+  @override
+  onBackClick(BuildContext context, String type,
+      {GoalSelectionScreenNotifier? value}) {
+    value?.updateStage(isForward: false, mContext: context);
+  }
 }
 
 class ScreenStep extends StatelessWidget {
@@ -185,9 +171,3 @@ class ScreenStep extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

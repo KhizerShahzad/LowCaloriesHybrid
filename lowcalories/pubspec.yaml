@@ -76,7 +76,22 @@ flutter:
           weight: 700
         - asset: fonts/inter_variable_font_sln.ttf
           weight: 400
-
+    - family: Inter_medium
+      fonts:
+        - asset: fonts/inter_medium.ttf
+          weight: 500
+    - family: Inter_bold
+      fonts:
+        - asset: fonts/inter_bold.ttf
+          weight: 500
+    - family: Inter_semibold
+      fonts:
+        - asset: fonts/inter_semibold.ttf
+          weight: 500
+    - family: Inter_regular
+      fonts:
+        - asset: fonts/inter_regular.ttf
+          weight: 500
     - family: Futura
       fonts:
         - asset: fonts/futurastd_book.otf

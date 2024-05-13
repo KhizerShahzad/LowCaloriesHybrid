@@ -63,13 +63,12 @@ class CalorieBreakDownListItem extends StatelessWidget {
                 ),
               ),
               Container(
-
                 child: Center(
                   child: DefaultTextStyle(
                     style: AppStyles()
-                        .fontInterBoldColor(15,Color(AppColors().deppDark)),
+                        .fontInterBoldColor(15, Color(AppColors().deppDark)),
                     child:
-                    Text(notifier.calorieBreakdownItem[itemIndex].itemName),
+                        Text(notifier.calorieBreakdownItem[itemIndex].itemName),
                   ),
                 ),
               )

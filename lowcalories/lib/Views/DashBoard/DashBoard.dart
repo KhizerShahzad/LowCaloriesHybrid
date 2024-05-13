@@ -13,6 +13,7 @@ import 'package:lowcalories/Views/DashBoard/CalorieItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoardMenuItem.dart';
 import 'package:lowcalories/Views/DashBoard/DeliverySelectorItem.dart';
 import 'package:lowcalories/Views/DashBoard/YourMealPlan.dart';
+import 'package:lowcalories/Views/SignUp/SignUpScreen.dart';
 import 'package:provider/provider.dart';
 
 class DashBoard extends StatelessWidget {
@@ -435,6 +436,11 @@ class PriceShow extends StatelessWidget implements CheckOutButtonListner {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => YourMealPlan()),
+      );
+    }  else  if (type == "MealPlan") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SignUpScreen()),
       );
     }
   }

@@ -7,6 +7,9 @@ import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:intl/intl.dart';
+import 'package:lowcalories/Utills/AppStyles.dart';
+import 'package:lowcalories/Views/CommonWidgets/DecoratedTextField.dart';
+import 'package:lowcalories/Views/CommonWidgets/DotSmall.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -20,13 +23,7 @@ class YourMealPlan extends StatelessWidget {
         body: Container(
       child: PopScope(
         canPop: true,
-        onPopInvoked: (isPoped) {
-          /*      Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SignInSelectionScreen()),
-          );*/
-        },
+        onPopInvoked: (isPoped) {},
         child: SafeArea(
             child: Stack(children: [
           SingleChildScrollView(
@@ -44,7 +41,7 @@ class YourMealPlan extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20),
+                        padding: const EdgeInsets.only(right: 15, left: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,8 +75,8 @@ class YourMealPlan extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                           top: AppSizes().GoalSelectionTop(context),
-                          right: 20,
-                          left: 20,
+                          right: 15,
+                          left: 15,
                           bottom: 10,
                         ),
                         child: Container(
@@ -166,8 +163,8 @@ class YourMealPlan extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(
                       top: AppSizes().GoalSelectionTop(context),
-                      right: 20,
-                      left: 20),
+                      right: 15,
+                      left: 15),
                   decoration: BoxDecoration(color: Colors.white),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,8 +177,8 @@ class YourMealPlan extends StatelessWidget {
                             style: TextStyle(
                                 color: Color(AppColors().titleTextColor),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 17,
-                                fontFamily: 'Inter'),
+                                fontSize: 18,
+                                fontFamily: 'Inter_medium'),
                             child: Text("Your macros"),
                           ),
                         ],
@@ -253,7 +250,7 @@ class YourMealPlan extends StatelessWidget {
                           Column(
                             children: [
                               Container(
-                                width: 200,
+                                width: 180,
                                 child: Column(
                                   children: [
                                     CalorieShower("Protien", "50g"),
@@ -288,7 +285,7 @@ class YourMealPlan extends StatelessWidget {
                                 color: Color(AppColors().titleTextColor),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18,
-                                fontFamily: 'Inter'),
+                                fontFamily: 'Inter_medium'),
                             child: Text("Meal of the Day"),
                           ),
                         ],
@@ -317,7 +314,7 @@ class YourMealPlan extends StatelessWidget {
               ],
             ),
           ),
-          PriceShow("Meal Plan")
+          PriceShow("MealPlan")
         ])),
       ),
     ));
@@ -457,53 +454,43 @@ class MealItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: DefaultTextStyle(
-                        style: TextStyle(
-                            color: Color(AppColors().titleTextColor),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            fontFamily: 'Inter'),
+                        style: AppStyles().fontInterMedium(
+                            13, Color(AppColors().titleTextColor)),
                         child: Text(notifier.mealDummyItems[index].mealType),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: DefaultTextStyle(
-                        style: TextStyle(
-                            color: Color(AppColors().titleTextColor),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            fontFamily: 'Inter'),
+                        style: AppStyles().fontInterMedium(16, Colors.black),
                         child: Text(notifier.mealDummyItems[index].mealName),
                       ),
-                    ) ,    Padding(
+                    ),
+                    Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: Row(
                         children: [
                           DefaultTextStyle(
-                            style: TextStyle(
-                                color: Color(AppColors().titleTextColor),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                fontFamily: 'Inter'),
-                            child: Text(notifier.mealDummyItems[index].calories +" "+"Cal ")
-                          ),DotSmall(),
+                              style: TextStyle(
+                                  color: Color(AppColors().titleTextColor),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                  fontFamily: 'Inter'),
+                              child: Text(
+                                  notifier.mealDummyItems[index].calories +
+                                      " " +
+                                      "Cal ")),
+                          DotSmall(),
                           DefaultTextStyle(
                             style: TextStyle(
                                 color: Color(AppColors().titleTextColor),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                                 fontFamily: 'Inter'),
-                            child: Text(" "+
-                                notifier.mealDummyItems[index].fats+" "+"Fat "),
-                          ),DotSmall(),
-                          DefaultTextStyle(
-                            style: TextStyle(
-                                color: Color(AppColors().titleTextColor),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                fontFamily: 'Inter'),
-                            child: Text(" "+
-                                notifier.mealDummyItems[index].protiens+" "+"Protiens "),
+                            child: Text(" " +
+                                notifier.mealDummyItems[index].fats +
+                                " " +
+                                "Fat "),
                           ),
                           DotSmall(),
                           DefaultTextStyle(
@@ -512,8 +499,22 @@ class MealItem extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                                 fontFamily: 'Inter'),
-                            child: Text(" "+
-                                notifier.mealDummyItems[index].protiens+" "+"Carbs"),
+                            child: Text(" " +
+                                notifier.mealDummyItems[index].protiens +
+                                " " +
+                                "Protiens "),
+                          ),
+                          DotSmall(),
+                          DefaultTextStyle(
+                            style: TextStyle(
+                                color: Color(AppColors().titleTextColor),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                fontFamily: 'Inter'),
+                            child: Text(" " +
+                                notifier.mealDummyItems[index].protiens +
+                                " " +
+                                "Carbs"),
                           )
                         ],
                       ),
@@ -527,21 +528,4 @@ class MealItem extends StatelessWidget {
   }
 }
 
-class DotSmall extends StatelessWidget {
-  const DotSmall({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration:BoxDecoration(
-        color: Color(AppColors().lightGreY3Opacity),
-        shape: BoxShape.circle,
-        border: Border.all(width: 5.0, color: Color(AppColors().lightGreY3Opacity)),
-      ),
-      height: 10,
-      width: 10,
-    );
-  }
-}

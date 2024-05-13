@@ -81,9 +81,16 @@ class AppStyles {
 
   fontInterBold(double fontSize) {
     return TextStyle(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
         fontSize: fontSize,
-        fontFamily: 'Inter',
+        fontFamily: 'Inter_bold',
         color: Color(AppColors().titleTextColor));
+  }
+  fontInterMedium(double fontSize, Color textColor) {
+    return TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: fontSize,
+        fontFamily: 'Inter_medium',
+        color: textColor);
   }
 }
