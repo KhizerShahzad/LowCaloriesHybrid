@@ -40,6 +40,9 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
   TextEditingController weightController = TextEditingController();
   TextEditingController targetWeightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailAdressController = TextEditingController();
   List<ListItem> stage4Items = [
     ListItem("Assets/ic_fish.svg", "Fish"),
     ListItem("Assets/ic_meat.svg", "Meat"),

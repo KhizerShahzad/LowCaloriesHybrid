@@ -6,4 +6,7 @@ class UserProfile {
   var weight = "";
   var height = "";
   var targetWeight = "";
+  var firstName = "";
+  var lastName = "";
+  var emailAdress = "";
 }

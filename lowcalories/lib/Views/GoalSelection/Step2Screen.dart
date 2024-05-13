@@ -8,6 +8,7 @@ import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Views/CommonWidgets/DecoratedTextField.dart';
+import 'package:lowcalories/Views/CommonWidgets/TextStart.dart';
 
 class GoalStage2Stateful extends StatefulWidget {
   GoalStage2Stateful({super.key, required this.notifier});
@@ -35,7 +36,11 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
           child: Column(
             children: [
               TextStart(
-                lableText: "Gender",
+                lableText: "Gender",textStyle:  TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  color: Color(AppColors().titleTextColor)),
               ),
               Row(
                 children: [
@@ -60,7 +65,11 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
                 child: Column(
                   children: [
                     TextStart(
-                      lableText: "Physical Detail",
+                      lableText: "Physical Detail",textStyle:  TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        fontFamily: 'Inter',
+                        color: Color(AppColors().titleTextColor)),
                     ),
                     DateOfBirth(
                         notifier: notifier,
@@ -375,28 +384,7 @@ class GoalInputText extends StatelessWidget {
 
 
 
-class TextStart extends StatelessWidget {
-  TextStart({super.key, required this.lableText});
 
-  var lableText = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        DefaultTextStyle(
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              fontFamily: 'Inter',
-              color: Color(AppColors().titleTextColor)),
-          child: Text(lableText),
-        ),
-      ],
-    );
-  }
-}
 
 handleClick(
     String type, BuildContext mContext, GoalSelectionScreenNotifier notifier) {
