@@ -39,7 +39,7 @@ class AppBarWithArrow extends StatelessWidget {
                 },
                 child: Image.asset(
                   fit: BoxFit.fitHeight,
-                  'Assets/customBack.jpg',
+                  'Assets/customBackGrey.png',
                   height: 55,
                   width: 55,
                 ),

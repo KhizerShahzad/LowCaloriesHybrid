@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
-import 'package:lowcalories/Views/CommonWidgets/DecoratedTextField.dart';
 
 class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
   String fieldHint = "";
@@ -14,6 +13,7 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
   GoalSelectionScreenNotifier notifier;
   TextEditingController controller;
   String fieldUnit = "";
+  bool isPasswordField = false;
 
   InputTextFieldDecoratedWithoutImage(
       {super.key,
@@ -21,7 +21,8 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
       required this.fieldText,
       required this.fieldHint,
       required this.controller,
-      required this.fieldUnit});
+      required this.fieldUnit,
+      required this.isPasswordField});
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +84,7 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
                                           fontFamily: 'Inter',
                                           color: Color(
                                               AppColors().titleTextColor)),
+                                      obscureText: isPasswordField,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: fieldHint,

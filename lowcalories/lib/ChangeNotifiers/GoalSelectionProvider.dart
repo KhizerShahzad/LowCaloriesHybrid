@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lowcalories/Models/CalorieItem.dart';
 import 'package:lowcalories/Models/MealItem.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
 import 'package:lowcalories/Views/SignInSelectionScreen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
-import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step3Screen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step4Screen.dart';
-
 import 'package:lowcalories/Models/UserProfile.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStrings.dart';
@@ -25,6 +26,10 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
   var stage3Complete = false;
   var stage4Complete = false;
   var stage1Selection = "";
+  var userCurrentLocation = Marker(
+      markerId: MarkerId('Initial location'),
+      position: LatLng(31.463114, 74.222619));
+  var selectedLocationText = "";
   UserProfile userProfile = UserProfile();
   List<ListItem> stage1Items = [
     ListItem("Assets/dinner.svg", "Lose Weight"),
@@ -42,7 +47,8 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
   TextEditingController heightController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailAdressController = TextEditingController();
+  TextEditingController emailAddressController = TextEditingController();
+  TextEditingController passWordController = TextEditingController();
   List<ListItem> stage4Items = [
     ListItem("Assets/ic_fish.svg", "Fish"),
     ListItem("Assets/ic_meat.svg", "Meat"),
@@ -86,15 +92,40 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     ListItem("Assets/ic_athlete.svg", "I am an Athlete",
         listSubTitle: "Exercise 6-7 times/week")
   ];
+
   List<MealItem> mealDummyItems = [
-    MealItem("Assets/shrimpSandwich.png","Breakfast","Shrimp Sandwich","20",
-        "30","50","60"),
-    MealItem("Assets/shrimpSandwich.png","AfterNoon","Beetroot Salad","20",
-        "30","50","60"),
-    MealItem("Assets/shrimpSandwich.png","Lunch","Fettucine Pasta","20",
-        "30","50","60"),
-    MealItem("Assets/shrimpSandwich.png","Dinner","Biryani","20",
-        "30","50","60")
+    MealItem(
+        "Assets/shrimpSandwich.png",
+        "Breakfast",
+        "Shrimp Sandwich",
+        "20",
+        "30",
+        "50",
+        "60"),
+    MealItem(
+        "Assets/shrimpSandwich.png",
+        "AfterNoon",
+        "Beetroot Salad",
+        "20",
+        "30",
+        "50",
+        "60"),
+    MealItem(
+        "Assets/shrimpSandwich.png",
+        "Lunch",
+        "Fettucine Pasta",
+        "20",
+        "30",
+        "50",
+        "60"),
+    MealItem(
+        "Assets/shrimpSandwich.png",
+        "Dinner",
+        "Biryani",
+        "20",
+        "30",
+        "50",
+        "60")
   ];
 
   updateStage1Items(int index) {
@@ -169,9 +200,15 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       } else if (stageLevel == 1) {
         if (userProfile.gender.isNotEmpty &&
             userProfile.dateOfBirth.isNotEmpty &&
-            weightController.text.toString().isNotEmpty &&
-            heightController.text.toString().isNotEmpty &&
-            targetWeightController.text.toString().isNotEmpty) {
+            weightController.text
+                .toString()
+                .isNotEmpty &&
+            heightController.text
+                .toString()
+                .isNotEmpty &&
+            targetWeightController.text
+                .toString()
+                .isNotEmpty) {
           userProfile.weight = weightController.text.toString();
           userProfile.height = heightController.text.toString();
           userProfile.targetWeight = targetWeightController.text.toString();
@@ -182,11 +219,17 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
             showPrompt(mContext, 'Select Gender');
           } else if (userProfile.dateOfBirth.isEmpty) {
             showPrompt(mContext, 'Select Date of Birth');
-          } else if (weightController.text.toString().isEmpty) {
+          } else if (weightController.text
+              .toString()
+              .isEmpty) {
             showPrompt(mContext, 'Enter Weight');
-          } else if (heightController.text.toString().isEmpty) {
+          } else if (heightController.text
+              .toString()
+              .isEmpty) {
             showPrompt(mContext, 'Enter Height');
-          } else if (targetWeightController.text.toString().isEmpty) {
+          } else if (targetWeightController.text
+              .toString()
+              .isEmpty) {
             showPrompt(mContext, 'Enter Target Height');
           }
           stage2Complete = false;
@@ -213,8 +256,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
               return AlertDialog(
                 buttonPadding: EdgeInsets.only(bottom: 0),
                 contentPadding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(mContext).size.height * 0.005,
-                    horizontal: MediaQuery.of(mContext).size.width * 0.03),
+                    vertical: MediaQuery
+                        .of(mContext)
+                        .size
+                        .height * 0.005,
+                    horizontal: MediaQuery
+                        .of(mContext)
+                        .size
+                        .width * 0.03),
                 title: Text(
                   'Info',
                   style: TextStyle(
@@ -226,13 +275,19 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
                       fontWeight: FontWeight.w400),
                 ),
                 content: Container(
-                  height: MediaQuery.of(mContext).size.height * 0.05,
+                  height: MediaQuery
+                      .of(mContext)
+                      .size
+                      .height * 0.05,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                            left: MediaQuery.of(mContext).size.width * 0.02),
+                            left: MediaQuery
+                                .of(mContext)
+                                .size
+                                .width * 0.02),
                         child: Text(
                             'Are you sure you want to move back?\nYour Progress will be lost!',
                             style: TextStyle(
@@ -295,6 +350,36 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
     }
   }
 
+  Future<LatLng> getUserLocation() async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) {
+      print(error);
+    });
+
+    Geolocator.getCurrentPosition().then((value) {
+      userCurrentLocation = Marker(
+          markerId: MarkerId('User Location'),
+          position: LatLng(value.latitude, value.longitude));
+      var cameraPosition = CameraPosition(
+          zoom: 40, target: LatLng(value.latitude, value.longitude));
+      return cameraPosition;
+    });
+
+    return userCurrentLocation.position;
+  }
+
+  Future<void> getAddressFromLatLng(double latitude, double longitude) async {
+    await placemarkFromCoordinates(latitude, longitude)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+      selectedLocationText = place.name!.toString()+place.subLocality!.toString();
+      notifyListeners();
+    }).catchError((e) {
+      debugPrint(e);
+    });
+  }
+
   showPrompt(BuildContext mContext, String message) {
     showDialog(
         context: mContext,
@@ -302,8 +387,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
           return AlertDialog(
             backgroundColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(mContext).size.height * 0.013,
-                horizontal: MediaQuery.of(mContext).size.width * 0.03),
+                vertical: MediaQuery
+                    .of(mContext)
+                    .size
+                    .height * 0.013,
+                horizontal: MediaQuery
+                    .of(mContext)
+                    .size
+                    .width * 0.03),
             title: Text(
               'Info',
               style: TextStyle(
@@ -319,7 +410,10 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(mContext).size.width * 0.023),
+                      left: MediaQuery
+                          .of(mContext)
+                          .size
+                          .width * 0.023),
                   child: Text(message,
                       style: TextStyle(
                           fontSize: 14,
@@ -373,8 +467,14 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         builder: (mContext) {
           return AlertDialog(
             contentPadding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(mContext).size.height * 0.013,
-                horizontal: MediaQuery.of(mContext).size.width * 0.03),
+                vertical: MediaQuery
+                    .of(mContext)
+                    .size
+                    .height * 0.013,
+                horizontal: MediaQuery
+                    .of(mContext)
+                    .size
+                    .width * 0.03),
             title: Text(
               'Info',
               style: TextStyle(
@@ -390,7 +490,10 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(mContext).size.width * 0.02),
+                      left: MediaQuery
+                          .of(mContext)
+                          .size
+                          .width * 0.02),
                   child: Text('Please Select One!',
                       style: TextStyle(
                           fontSize: 14,

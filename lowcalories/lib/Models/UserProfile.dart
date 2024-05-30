@@ -9,4 +9,5 @@ class UserProfile {
   var firstName = "";
   var lastName = "";
   var emailAdress = "";
+  var passWord = "";
 }

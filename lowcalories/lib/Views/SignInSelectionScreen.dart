@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/Views/GoalSelection/GoalSelection.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
+import 'package:lowcalories/Views/SignUp/SignInScreen.dart';
 
 class SignInSelectionScreen extends StatelessWidget {
   const SignInSelectionScreen({super.key});
@@ -18,11 +19,14 @@ class SignInSelectionScreen extends StatelessWidget {
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              title: const Text('ALERT',style: TextStyle(fontSize: 20),),
+              title: const Text(
+                'ALERT',
+                style: TextStyle(fontSize: 20),
+              ),
               content: const Text('Are you sure you want to Exit?'),
               actions: <Widget>[
                 TextButton(
-                  onPressed: () =>  SystemNavigator.pop(),
+                  onPressed: () => SystemNavigator.pop(),
                   child: const Text('Yes'),
                 ),
                 TextButton(
@@ -34,7 +38,6 @@ class SignInSelectionScreen extends StatelessWidget {
               ],
             ),
           );
-
         },
         child: SingleChildScrollView(
           child: Container(
@@ -42,7 +45,6 @@ class SignInSelectionScreen extends StatelessWidget {
             color: Colors.white,
             child: SafeArea(
               child: Column(
-
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 0, right: 0, top: 20),
@@ -209,34 +211,46 @@ class SignInSelectionScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Center(
-                                child: Container(
-                                    margin: EdgeInsets.only(
-                                        top:
-                                            MediaQuery.of(context).size.height *
-                                                0.03),
-                                    child: Text.rich(
-                                      TextSpan(
-                                        text: 'Already have an account?',
-                                        style: TextStyle(
-                                            color: Color(AppColors().deppDark),
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 16,
-                                            fontFamily: 'Roboto'),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: 'Sign in ',
-                                              style: TextStyle(
-                                                  color: Color(
-                                                      AppColors().deppDark),
-                                                  fontWeight: FontWeight.bold,
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  fontSize: 16,
-                                                  fontFamily: 'Roboto')),
-                                        ],
-                                      ),
-                                    ))),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignInScreen()),
+                                );
+                              },
+                              child: Center(
+                                  child: Container(
+                                      margin: EdgeInsets.only(
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.03),
+                                      child: Text.rich(
+                                        TextSpan(
+                                          text: 'Already have an account?',
+                                          style: TextStyle(
+                                              color:
+                                                  Color(AppColors().deppDark),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16,
+                                              fontFamily: 'Roboto'),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Sign in ',
+                                                style: TextStyle(
+                                                    color: Color(
+                                                        AppColors().deppDark),
+                                                    fontWeight: FontWeight.bold,
+                                                    decoration: TextDecoration
+                                                        .underline,
+                                                    fontSize: 16,
+                                                    fontFamily: 'Roboto')),
+                                          ],
+                                        ),
+                                      ))),
+                            ),
                           ],
                         ),
                       ),

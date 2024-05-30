@@ -3,17 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/Utills/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
-import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
-import 'package:lowcalories/Views/CommonWidgets/DecoratedTextField.dart';
 import 'package:lowcalories/Views/CommonWidgets/DecoratedTextFieldWithoutImage.dart';
 import 'package:lowcalories/Views/CommonWidgets/TextStart.dart';
-import 'package:lowcalories/Views/GoalSelection/Step2Screen.dart';
+import 'package:lowcalories/Views/SignUp/SignInScreen.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -27,24 +24,21 @@ class _SignUpScreenState extends State<SignUpScreen>
     implements AppBarClickInterface {
   @override
   Widget build(BuildContext context) {
-    return Material(child: Consumer<GoalSelectionScreenNotifier>(
+    return Scaffold(body: Consumer<GoalSelectionScreenNotifier>(
         builder: (BuildContext context, value, Widget? child) {
-      return Container(
-        color: Colors.white,
-        child: PopScope(
-          canPop: false,
-          onPopInvoked: (isPoped) {},
+      return SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
           child: SafeArea(
             child: Padding(
               padding: EdgeInsets.only(left: 15, right: 15),
               child: Column(
                 children: [
                   AppBarWithArrow(
-                    appBarClickInterface: this,
-                    appBarText: "Sign Up",
-                    screenName: "",
-                    notifier: GoalSelectionScreenNotifier(),
-                  ),
+                      appBarClickInterface: this,
+                      appBarText: "Sign Up",
+                      screenName: "",
+                      notifier: value),
                   Column(
                     children: [
                       Padding(
@@ -62,6 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             : value.userProfile.firstName,
                         controller: value.firstNameController,
                         fieldUnit: "",
+                        isPasswordField: false,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 15),
@@ -78,6 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             : value.userProfile.lastName,
                         controller: value.lastNameController,
                         fieldUnit: "",
+                        isPasswordField: false,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 15),
@@ -92,8 +88,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                         fieldText: value.userProfile.lastName.isEmpty
                             ? ""
                             : value.userProfile.lastName,
-                        controller: value.lastNameController,
+                        controller: value.emailAddressController,
                         fieldUnit: "",
+                        isPasswordField: false,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 15),
@@ -108,42 +105,108 @@ class _SignUpScreenState extends State<SignUpScreen>
                         fieldText: value.userProfile.lastName.isEmpty
                             ? ""
                             : value.userProfile.lastName,
-                        controller: value.lastNameController,
+                        controller: value.passWordController,
                         fieldUnit: "",
+                        isPasswordField: true,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.07,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Color(AppColors().newGreen),
-                                  border: Border.all(
-                                    color: const Color.fromARGB(
-                                        225, 222, 226, 230),
-                                    width: 2,
-                                    style: BorderStyle.solid,
+                      InkWell(
+                        onTap: () {
+                          if (value.firstNameController.text.isEmpty) {
+                            value.showPrompt(context, "Enter First Name");
+                          } else if (value.lastNameController.text.isEmpty) {
+                            value.showPrompt(context, "Enter Last Name");
+                          } else if (value
+                              .emailAddressController.text.isEmpty) {
+                            value.showPrompt(context, "Enter Email Address");
+                          } else if (value.passWordController.text.isEmpty) {
+                            value.showPrompt(context, "Enter Password");
+                          } else {
+                            value.userProfile.firstName =
+                                value.firstNameController.text;
+                            value.userProfile.lastName =
+                                value.lastNameController.text;
+                            value.userProfile.emailAdress =
+                                value.emailAddressController.text;
+                            value.userProfile.passWord =
+                                value.emailAddressController.text;
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignInScreen()),
+                            );
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Color(AppColors().newGreen),
+                                    border: Border.all(
+                                      color: const Color.fromARGB(
+                                          225, 222, 226, 230),
+                                      width: 2,
+                                      style: BorderStyle.solid,
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: DefaultTextStyle(
-                                    style: AppStyles()
-                                        .fontInter500Color(16, Colors.white),
-                                    child: Text("Sign Up"),
+                                  child: Center(
+                                    child: DefaultTextStyle(
+                                      style: AppStyles()
+                                          .fontInter500Color(16, Colors.white),
+                                      child: Text("Sign Up"),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      )
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignInScreen()),
+                          );
+                        },
+                        child: Center(
+                            child: Container(
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.03),
+                                child: Text.rich(
+                                  TextSpan(
+                                    text: 'Already have an account?',
+                                    style: TextStyle(
+                                        color: Color(AppColors().deppDark),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        fontFamily: 'Roboto'),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Sign in ',
+                                          style: TextStyle(
+                                              color:
+                                                  Color(AppColors().deppDark),
+                                              fontWeight: FontWeight.bold,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 16,
+                                              fontFamily: 'Roboto')),
+                                    ],
+                                  ),
+                                ))),
+                      ),
                     ],
                   )
                 ],
@@ -157,5 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen>
 
   @override
   onBackClick(BuildContext context, String type,
-      {GoalSelectionScreenNotifier? value}) {}
+      {GoalSelectionScreenNotifier? value}) {
+    Navigator.of(context).pop();
+  }
 }

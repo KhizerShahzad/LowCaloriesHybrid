@@ -28,7 +28,6 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Container(
           margin:
@@ -36,11 +35,12 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
           child: Column(
             children: [
               TextStart(
-                lableText: "Gender",textStyle:  TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  fontFamily: 'Inter',
-                  color: Color(AppColors().titleTextColor)),
+                lableText: "Gender",
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    color: Color(AppColors().titleTextColor)),
               ),
               Row(
                 children: [
@@ -65,11 +65,12 @@ class _GoalStage2StatefulState extends State<GoalStage2Stateful> {
                 child: Column(
                   children: [
                     TextStart(
-                      lableText: "Physical Detail",textStyle:  TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        fontFamily: 'Inter',
-                        color: Color(AppColors().titleTextColor)),
+                      lableText: "Physical Detail",
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          fontFamily: 'Inter',
+                          color: Color(AppColors().titleTextColor)),
                     ),
                     DateOfBirth(
                         notifier: notifier,
@@ -381,10 +382,6 @@ class GoalInputText extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 handleClick(
     String type, BuildContext mContext, GoalSelectionScreenNotifier notifier) {

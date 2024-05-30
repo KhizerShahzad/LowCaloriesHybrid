@@ -8,7 +8,6 @@ import 'package:lowcalories/Utills/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
-import 'package:lowcalories/Views/SignUp/SignUpScreen.dart';
 import 'package:provider/provider.dart';
 
 class GoalSelection extends StatefulWidget {
