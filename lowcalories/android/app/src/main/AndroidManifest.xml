@@ -7,7 +7,9 @@
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
         android:label="lowcalories">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBs4vpoJoWZ2G4yEr33sMYhGPAAHQNdDFo" />

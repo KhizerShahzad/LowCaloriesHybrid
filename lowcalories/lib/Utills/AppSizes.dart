@@ -11,6 +11,15 @@ class AppSizes {
   paddingWidthPoint3(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.03;
   }
+  paddingHeightPoint3(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.03;
+  }
+  paddingHeightPoint6(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.05;
+  }
+  paddingHeightPoint1(BuildContext context) {
+    return MediaQuery.of(context).size.height * 0.01;
+  }
   paddingWidthPoint2(BuildContext context) {
     return MediaQuery.of(context).size.width * 0.005;
   }

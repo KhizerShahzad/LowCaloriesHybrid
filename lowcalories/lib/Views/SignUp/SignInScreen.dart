@@ -39,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen>
                       AppBarWithArrow(
                         appBarClickInterface: this,
                         appBarText: "Log In",
-                        screenName: "",
+                        screenName:"Log in",
                         notifier: value,
                       ),
                       Column(
@@ -124,7 +124,7 @@ class _SignInScreenState extends State<SignInScreen>
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SelectDeliveryAdress()),
+                                                    SelectDeliveryAddress()),
                                           );
                                         },
                                         child: Center(
@@ -157,7 +157,10 @@ class _SignInScreenState extends State<SignInScreen>
 
   @override
   onBackClick(BuildContext context, String type,
-      {GoalSelectionScreenNotifier? value}) {
+      {GoalSelectionScreenNotifier? value}) {}
+
+  @override
+  onBackClickWithoutNotifier(BuildContext context, String type) {
     Navigator.of(context).pop();
   }
 }

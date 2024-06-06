@@ -134,6 +134,9 @@ class _GoalSelectionState extends State<GoalSelection>
       {GoalSelectionScreenNotifier? value}) {
     value?.updateStage(isForward: false, mContext: context);
   }
+
+  @override
+  onBackClickWithoutNotifier(BuildContext context, String type) {}
 }
 
 class ScreenStep extends StatelessWidget {

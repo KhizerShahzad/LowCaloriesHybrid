@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   AppBarWithArrow(
                       appBarClickInterface: this,
                       appBarText: "Sign Up",
-                      screenName: "",
+                      screenName: "sign_up",
                       notifier: value),
                   Column(
                     children: [
@@ -221,6 +221,11 @@ class _SignUpScreenState extends State<SignUpScreen>
   @override
   onBackClick(BuildContext context, String type,
       {GoalSelectionScreenNotifier? value}) {
+
+  }
+
+  @override
+  onBackClickWithoutNotifier(BuildContext context, String type) {
     Navigator.of(context).pop();
   }
 }

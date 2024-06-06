@@ -6,14 +6,13 @@ import 'package:flutter/widgets.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 
-class DecoratedTextFieldWithFieldUnit extends StatelessWidget {
+class DecoratedTextFieldWithoutFieldUnit extends StatelessWidget {
   String fieldHint = "";
   String fieldText = "";
-  String fieldUnit = "";
   TextEditingController controller;
 
-  DecoratedTextFieldWithFieldUnit(
-      this.fieldHint, this.fieldText, this.controller, this.fieldUnit);
+  DecoratedTextFieldWithoutFieldUnit(
+      this.fieldHint, this.fieldText, this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +23,8 @@ class DecoratedTextFieldWithFieldUnit extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width * 0.6,
+              height: MediaQuery.of(context).size.height * 0.06,
+              width: MediaQuery.of(context).size.width *0.8,
               child: Padding(
                 padding: EdgeInsets.only(
                     left: AppSizes().paddingWidthPoint2(context)),
@@ -53,8 +52,8 @@ class DecoratedTextFieldWithFieldUnit extends StatelessWidget {
                       return text.isEmpty
                           ? newValue
                           : double.tryParse(text) == null
-                              ? oldValue
-                              : newValue;
+                          ? oldValue
+                          : newValue;
                     }),
                   ],
                 ),
@@ -62,18 +61,6 @@ class DecoratedTextFieldWithFieldUnit extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
-          padding:
-              EdgeInsets.only(right: AppSizes().paddingWidthPoint3(context)),
-          child: Text(
-            fieldUnit,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                fontFamily: 'Inter',
-                color: Color(AppColors().titleTextColor)),
-          ),
-        )
       ],
     );
   }

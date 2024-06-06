@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
+import 'package:lowcalories/ChangeNotifiers/MapChangeNotifier.dart';
 import 'package:lowcalories/Utills/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 
@@ -19,6 +20,7 @@ class AppBarWithArrow extends StatelessWidget {
   String screenName;
   AppBarClickInterface appBarClickInterface;
   GoalSelectionScreenNotifier notifier = GoalSelectionScreenNotifier();
+  MapChangeNotifier mapChangenNotifier = MapChangeNotifier();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,15 @@ class AppBarWithArrow extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  appBarClickInterface.onBackClick(context, appBarText,
-                      value: notifier);
+                  if(screenName=="DeliverySelection"||screenName=="Log in"||
+                      screenName=="meal_plan"||screenName=="sign_up")
+                    {
+                      appBarClickInterface.onBackClickWithoutNotifier(context, appBarText);
+                    }else{
+                    appBarClickInterface.onBackClick(context, appBarText,
+                        value: notifier);
+                  }
+
                 },
                 child: Image.asset(
                   fit: BoxFit.fitHeight,

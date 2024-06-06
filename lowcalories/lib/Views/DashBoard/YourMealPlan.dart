@@ -45,7 +45,7 @@ class YourMealPlan extends StatelessWidget implements AppBarClickInterface {
                       child: AppBarWithArrow(
                           appBarClickInterface: this,
                           appBarText: "Your meal plan",
-                          screenName: "",
+                          screenName: "meal_plan",
                           notifier: GoalSelectionScreenNotifier()),
                     ),
                     Padding(
@@ -395,7 +395,10 @@ class YourMealPlan extends StatelessWidget implements AppBarClickInterface {
 
   @override
   onBackClick(BuildContext context, String type,
-      {GoalSelectionScreenNotifier? value}) {
+      {GoalSelectionScreenNotifier? value}) {}
+
+  @override
+  onBackClickWithoutNotifier(BuildContext context, String type) {
     Navigator.of(context).pop();
   }
 }

@@ -370,7 +370,7 @@ class GoalInputText extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                             left: AppSizes().paddingWidthPoint2(context)),
-                        child: DecoratedTextField(
+                        child: DecoratedTextFieldWithFieldUnit(
                             fieldHint, "", controller, fieldUnit),
                       ),
                     ],
