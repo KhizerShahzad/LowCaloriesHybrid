@@ -44,8 +44,8 @@ class DecoratedTextFieldWithoutFieldUnit extends StatelessWidget {
                         fontFamily: 'Inter',
                         color: Color(AppColors().titleTextColor)),
                   ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
+                  keyboardType: TextInputType.streetAddress,
+            /*      inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
                     TextInputFormatter.withFunction((oldValue, newValue) {
                       final text = newValue.text;
@@ -55,7 +55,7 @@ class DecoratedTextFieldWithoutFieldUnit extends StatelessWidget {
                           ? oldValue
                           : newValue;
                     }),
-                  ],
+                  ],*/
                 ),
               ),
             ),

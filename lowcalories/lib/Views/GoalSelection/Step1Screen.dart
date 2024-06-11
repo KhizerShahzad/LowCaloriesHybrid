@@ -8,6 +8,7 @@ import 'package:lowcalories/Models/ListModel.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
+
 class GoalStage1List extends StatelessWidget {
   GoalStage1List({super.key, required this.items, required this.notifier});
 
@@ -29,6 +30,7 @@ class GoalStage1List extends StatelessWidget {
     );
   }
 }
+
 class GoalStep1ItemCustom extends StatelessWidget {
   GoalStep1ItemCustom({super.key, required this.index, required this.notifier});
 
@@ -89,7 +91,8 @@ class GoalStep1ItemCustom extends StatelessWidget {
                           topRight: Radius.circular(20)),
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.only(left: AppSizes().paddingWidthPoint3(context)),
+                      padding: EdgeInsets.only(
+                          left: AppSizes().paddingWidthPoint3(context)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
