@@ -20,7 +20,6 @@ import '../Views/GoalSelection/Step2Screen.dart';
 
 class GoalSelectionScreenNotifier with ChangeNotifier {
   var stageText = AppStrings().goalScreen1Text;
-  late GoogleMapController mapController;
   var stageLevel = 0;
   var stage1Complete = false;
   var stage2Complete = false;

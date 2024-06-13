@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -91,22 +90,19 @@ class MapChangeNotifier with ChangeNotifier {
     if (input.isEmpty) {
       clearPlacesList();
     } else {
-      if (input != searchText) {
-        input = searchText;
-        String baseURLMAP =
-            'https://maps.googleapis.com/maps/api/place/autocomplete/json';
-        String request =
-            '$baseURLMAP?input=$input&key=AIzaSyCUMtsdzpgNgfq7NxgUGRUpVlh-0oiYDrs&sessiontoken=$sessionToken';
-        var response = await http.get(Uri.parse(request));
-        if (response.statusCode == 200) {
-          places.clear();
-          placeListHeight = MediaQuery.of(context).size.height * 0.1;
-          places.addAll(jsonDecode(response.body.toString())['predictions']);
-          placeListVisibility = true;
-          notifyListeners();
-        } else {
-          clearPlacesList();
-        }
+      String baseURLMAP =
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+      String request =
+          '$baseURLMAP?input=$input&key=AIzaSyCUMtsdzpgNgfq7NxgUGRUpVlh-0oiYDrs&sessiontoken=$sessionToken';
+      var response = await http.get(Uri.parse(request));
+      if (response.statusCode == 200) {
+        places.clear();
+        placeListHeight = 100;
+        places.addAll(jsonDecode(response.body.toString())['predictions']);
+        placeListVisibility = true;
+        notifyListeners();
+      } else {
+        clearPlacesList();
       }
     }
   }

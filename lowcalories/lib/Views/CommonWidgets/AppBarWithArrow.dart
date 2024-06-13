@@ -36,15 +36,16 @@ class AppBarWithArrow extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  if(screenName=="DeliverySelection"||screenName=="Log in"||
-                      screenName=="meal_plan"||screenName=="sign_up")
-                    {
-                      appBarClickInterface.onBackClickWithoutNotifier(context, appBarText);
-                    }else{
+                  if (appBarText == "Delivery Address" ||
+                      screenName == "Log in" ||
+                      screenName == "meal_plan" ||
+                      screenName == "sign_up") {
+                    appBarClickInterface.onBackClickWithoutNotifier(
+                        context, appBarText);
+                  } else {
                     appBarClickInterface.onBackClick(context, appBarText,
                         value: notifier);
                   }
-
                 },
                 child: Image.asset(
                   fit: BoxFit.fitHeight,

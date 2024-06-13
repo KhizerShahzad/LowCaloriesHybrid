@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/ChangeNotifiers/MapChangeNotifier.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
@@ -9,11 +8,11 @@ import 'package:lowcalories/Views/CommonWidgets/DecoratedTextFieldWithoutUnit.da
 class MapSelectionInput extends StatelessWidget {
   String fieldHint = "";
   String fieldText = "";
-
+  var selectedLongitude = 0.0;
+  var selectedLatitude = 0.0;
   var imagePath = "";
   MapChangeNotifier notifier;
   TextEditingController controller;
-
 
   MapSelectionInput(
       {super.key,
@@ -38,11 +37,11 @@ class MapSelectionInput extends StatelessWidget {
         ),
       ),
       child: Container(
-          height: MediaQuery.of(context).size.height * 0.07,
-          width: MediaQuery.of(context).size.width*0.09,
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: MediaQuery.of(context).size.width * 0.1,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 flex: 1,
@@ -51,18 +50,26 @@ class MapSelectionInput extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Color(AppColors().itemBack),
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: AppSizes().paddingWidthPoint2(context)),
-                        child: DecoratedTextFieldWithoutFieldUnit(
-                            fieldHint, "", controller),
+                      Container(
+                          padding: EdgeInsets.all(12),
+                          child: SvgPicture.asset("Assets/Search.svg")),
+                      DecoratedTextFieldWithoutFieldUnit(
+                          fieldHint, "", controller, notifier),
+                      InkWell(
+                        onTap: () {
+                          controller.text = "";
+                          notifier.clearPlacesList();
+                        },
+                        child: Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(left: 0),
+                            child: SvgPicture.asset("Assets/cross.svg")),
                       ),
                     ],
                   ),

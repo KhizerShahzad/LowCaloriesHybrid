@@ -14,7 +14,8 @@ class PlaceItemCustom extends StatelessWidget {
       onTap: () {
         mapNotifier.placeInputController.text =
             mapNotifier.places[index]['description'];
-        mapNotifier.places.clear();
+        /*  mapNotifier.samplePlaces[index];*/
+        mapNotifier.clearPlacesList();
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.04,
