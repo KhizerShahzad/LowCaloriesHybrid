@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
-import 'package:lowcalories/Utills/AppBarClickInterface.dart';
+import 'package:lowcalories/Utills/Interfaces/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';

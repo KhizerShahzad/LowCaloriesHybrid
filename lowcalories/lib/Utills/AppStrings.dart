@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
 
 class AppStrings {
   static final AppStrings _AppStrings = AppStrings._privateConstructor();

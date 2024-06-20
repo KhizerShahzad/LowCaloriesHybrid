@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
 import 'package:lowcalories/ChangeNotifiers/MapChangeNotifier.dart';
-import 'package:lowcalories/Utills/AppBarClickInterface.dart';
+import 'package:lowcalories/Utills/Interfaces/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 
 class AppBarWithArrow extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
-import 'package:lowcalories/Utills/AppBarClickInterface.dart';
+import 'package:lowcalories/Utills/Interfaces/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:intl/intl.dart';

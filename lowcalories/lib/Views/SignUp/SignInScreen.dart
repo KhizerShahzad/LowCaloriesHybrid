@@ -4,13 +4,15 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
-import 'package:lowcalories/Utills/AppBarClickInterface.dart';
+import 'package:lowcalories/Utills/Interfaces/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
+import 'package:lowcalories/Utills/Interfaces/DialogClickInterface.dart';
+import 'package:lowcalories/Utills/UtillMethods.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
-import 'package:lowcalories/Views/CommonWidgets/DecoratedTextFieldWithoutImage.dart';
+import 'package:lowcalories/Views/CommonWidgets/InputTextFieldDecoratedWithoutImage.dart';
 import 'package:lowcalories/Views/CommonWidgets/TextStart.dart';
-import 'package:lowcalories/Views/SignUp/SelectDeliveryAdress.dart';
+import 'package:lowcalories/Views/SignUp/OrderSummary.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -21,7 +23,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen>
-    implements AppBarClickInterface {
+    implements AppBarClickInterface  , DialogClickInterface{
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Consumer<GoalSelectionScreenNotifier>(
@@ -39,7 +41,7 @@ class _SignInScreenState extends State<SignInScreen>
                       AppBarWithArrow(
                         appBarClickInterface: this,
                         appBarText: "Log In",
-                        screenName:"Log in",
+                        screenName: "Log in",
                         notifier: value,
                       ),
                       Column(
@@ -81,11 +83,12 @@ class _SignInScreenState extends State<SignInScreen>
                           InkWell(
                             onTap: () {
                               if (value.emailAddressController.text.isEmpty) {
-                                value.showPrompt(
-                                    context, "Enter Email Address");
+                                UtillMethods().showPrompt(
+                                    context, "Enter Email Address", this);
                               } else if (value
                                   .passWordController.text.isEmpty) {
-                                value.showPrompt(context, "Enter Password");
+
+                                UtillMethods().showPrompt(context, "Enter Password", this);
                               } else {
                                 value.userProfile.firstName =
                                     value.firstNameController.text;
@@ -120,11 +123,20 @@ class _SignInScreenState extends State<SignInScreen>
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                          Navigator.push(
+                                 /*         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     SelectDeliveryAddress()),
+                                          );*/
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderSummary(
+                                                      goalSelectionScreenNotifier:
+                                                          value,
+                                                    )),
                                           );
                                         },
                                         child: Center(
@@ -162,5 +174,15 @@ class _SignInScreenState extends State<SignInScreen>
   @override
   onBackClickWithoutNotifier(BuildContext context, String type) {
     Navigator.of(context).pop();
+  }
+
+  @override
+  onNegativeClick(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  @override
+  onPositiveClick(BuildContext context) {
+    Navigator.pop(context);
   }
 }

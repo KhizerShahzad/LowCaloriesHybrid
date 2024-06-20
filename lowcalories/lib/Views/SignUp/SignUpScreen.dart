@@ -4,11 +4,13 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lowcalories/ChangeNotifiers/GoalSelectionProvider.dart';
-import 'package:lowcalories/Utills/AppBarClickInterface.dart';
+import 'package:lowcalories/Utills/Interfaces/AppBarClickInterface.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
+import 'package:lowcalories/Utills/Interfaces/DialogClickInterface.dart';
+import 'package:lowcalories/Utills/UtillMethods.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
-import 'package:lowcalories/Views/CommonWidgets/DecoratedTextFieldWithoutImage.dart';
+import 'package:lowcalories/Views/CommonWidgets/InputTextFieldDecoratedWithoutImage.dart';
 import 'package:lowcalories/Views/CommonWidgets/TextStart.dart';
 import 'package:lowcalories/Views/SignUp/SignInScreen.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen>
-    implements AppBarClickInterface {
+    implements AppBarClickInterface, DialogClickInterface {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Consumer<GoalSelectionScreenNotifier>(
@@ -112,14 +114,18 @@ class _SignUpScreenState extends State<SignUpScreen>
                       InkWell(
                         onTap: () {
                           if (value.firstNameController.text.isEmpty) {
-                            value.showPrompt(context, "Enter First Name");
+                            UtillMethods()
+                                .showPrompt(context, "Enter First Name", this);
                           } else if (value.lastNameController.text.isEmpty) {
-                            value.showPrompt(context, "Enter Last Name");
+                            UtillMethods()
+                                .showPrompt(context, "Enter Last Name", this);
                           } else if (value
                               .emailAddressController.text.isEmpty) {
-                            value.showPrompt(context, "Enter Email Address");
+                            UtillMethods().showPrompt(
+                                context, "Enter Email Address", this);
                           } else if (value.passWordController.text.isEmpty) {
-                            value.showPrompt(context, "Enter Password");
+                            UtillMethods()
+                                .showPrompt(context, "Enter Password", this);
                           } else {
                             value.userProfile.firstName =
                                 value.firstNameController.text;
@@ -220,12 +226,16 @@ class _SignUpScreenState extends State<SignUpScreen>
 
   @override
   onBackClick(BuildContext context, String type,
-      {GoalSelectionScreenNotifier? value}) {
-
-  }
+      {GoalSelectionScreenNotifier? value}) {}
 
   @override
   onBackClickWithoutNotifier(BuildContext context, String type) {
     Navigator.of(context).pop();
   }
+
+  @override
+  onNegativeClick(BuildContext context) {}
+
+  @override
+  onPositiveClick(BuildContext context) {}
 }

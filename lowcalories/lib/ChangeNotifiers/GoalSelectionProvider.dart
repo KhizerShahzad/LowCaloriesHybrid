@@ -6,6 +6,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lowcalories/Models/CalorieItem.dart';
 import 'package:lowcalories/Models/MealItem.dart';
+import 'package:lowcalories/Utills/Interfaces/DialogClickInterface.dart';
+import 'package:lowcalories/Utills/UtillMethods.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
 import 'package:lowcalories/Views/SignInSelectionScreen.dart';
 import 'package:lowcalories/Views/GoalSelection/Step1Screen.dart';
@@ -18,7 +20,9 @@ import 'package:lowcalories/Models/ListModel.dart';
 
 import '../Views/GoalSelection/Step2Screen.dart';
 
-class GoalSelectionScreenNotifier with ChangeNotifier {
+class GoalSelectionScreenNotifier
+    with ChangeNotifier
+    implements DialogClickInterface {
   var stageText = AppStrings().goalScreen1Text;
   var stageLevel = 0;
   var stage1Complete = false;
@@ -195,15 +199,15 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
           moveForward(currentStageText: AppStrings().goalScreen3Text);
         } else {
           if (userProfile.gender.isEmpty) {
-            showPrompt(mContext, 'Select Gender');
+            UtillMethods().showPrompt(mContext, 'Select Gender', this);
           } else if (userProfile.dateOfBirth.isEmpty) {
-            showPrompt(mContext, 'Select Date of Birth');
+            UtillMethods().showPrompt(mContext, 'Select Date of Birth', this);
           } else if (weightController.text.toString().isEmpty) {
-            showPrompt(mContext, 'Enter Weight');
+            UtillMethods().showPrompt(mContext, 'Enter Weight', this);
           } else if (heightController.text.toString().isEmpty) {
-            showPrompt(mContext, 'Enter Height');
+            UtillMethods().showPrompt(mContext, 'Enter Height', this);
           } else if (targetWeightController.text.toString().isEmpty) {
-            showPrompt(mContext, 'Enter Target Height');
+            UtillMethods().showPrompt(mContext, 'Enter Target Height', this);
           }
           stage2Complete = false;
         }
@@ -309,78 +313,6 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
         moveBackword(currentStageText: AppStrings().goalScreen3Text);
       }
     }
-  }
-
-  showPrompt(BuildContext mContext, String message) {
-    showDialog(
-        context: mContext,
-        builder: (mContext) {
-          return AlertDialog(
-            backgroundColor: Colors.white,
-            contentPadding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(mContext).size.height * 0.013,
-                horizontal: MediaQuery.of(mContext).size.width * 0.03),
-            title: Text(
-              'Info',
-              style: TextStyle(
-                  fontSize: 23,
-                  color: Color(
-                    AppColors().popUpHeaderColor,
-                  ),
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w400),
-            ),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(mContext).size.width * 0.023),
-                  child: Text(message,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color(
-                            AppColors().popUpBodyTextColor,
-                          ),
-                          fontFamily: "Roboto",
-                          fontWeight: FontWeight.w400)),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(mContext);
-                },
-                child: Text(
-                  'Close',
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: Color(
-                        AppColors().titleTextColor,
-                      ),
-                      fontFamily: "Roboto",
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(mContext);
-                },
-                child: Text(
-                  'Okay',
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: Color(
-                        AppColors().newGreen,
-                      ),
-                      fontFamily: "Roboto",
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-            ],
-          );
-        });
   }
 
   showNoItemSelected(BuildContext mContext) {
@@ -515,5 +447,15 @@ class GoalSelectionScreenNotifier with ChangeNotifier {
       );
     }
     return Container();
+  }
+
+  @override
+  onNegativeClick(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  @override
+  onPositiveClick(BuildContext context) {
+    Navigator.pop(context);
   }
 }
