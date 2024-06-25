@@ -229,48 +229,7 @@ class DashBoard extends StatelessWidget {
                       padding: EdgeInsets.only(
                         top: AppSizes().SectionSeprationSpace(context),
                       ),
-                      child: Stack(children: [
-                        Container(
-                            height: MediaQuery.of(context).size.height * 0.117,
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.03),
-                            decoration: BoxDecoration(
-                              color: Color(AppColors().grey85transparent),
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  top:
-                                      MediaQuery.of(context).size.height * 0.04,
-                                  left:
-                                      MediaQuery.of(context).size.width * 0.02),
-                              child: Column(
-                                children: [
-                                  DefaultTextStyle(
-                                    style: AppStyles()
-                                        .fontInter400(15, Colors.white),
-                                    child: Text(
-                                      'Still Confused ?',
-                                    ),
-                                  ),
-                                  DefaultTextStyle(
-                                    style: AppStyles()
-                                        .fontInter400(15, Colors.white),
-                                    child: Text(
-                                      'Contact our Nutritionist',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.height * 0.02),
-                          child: SvgPicture.asset("Assets/call_center.svg"),
-                        ),
-                      ]),
+                      child: StillConfusedWidget(message: "",),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -293,6 +252,54 @@ class DashBoard extends StatelessWidget {
         PriceShow("Dashboard")
       ]),
     );
+  }
+}
+
+class StillConfusedWidget extends StatelessWidget {
+  String message = "";
+
+  StillConfusedWidget({super.key, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      Container(
+          height: MediaQuery.of(context).size.height * 0.117,
+          width: MediaQuery.of(context).size.width,
+          margin:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+          decoration: BoxDecoration(
+            color: Color(AppColors().grey85transparent),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.04,
+                left: MediaQuery.of(context).size.width * 0.02),
+            child: Column(
+              children: [
+                DefaultTextStyle(
+                  style: AppStyles().fontInter400(15, Colors.white),
+                  child: Text(
+                    'Still Confused ?',
+                  ),
+                ),
+                DefaultTextStyle(
+                  style: AppStyles().fontInter400(15, Colors.white),
+                  child: Text(
+                    'Contact our Nutritionist',
+                  ),
+                )
+              ],
+            ),
+          )),
+      Container(
+        margin:
+            EdgeInsets.only(left: MediaQuery.of(context).size.height * 0.02),
+        child: SvgPicture.asset("Assets/call_center.svg"),
+      ),
+    ]);
   }
 }
 
@@ -388,7 +395,7 @@ class PriceShow extends StatelessWidget implements CheckOutButtonListner {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.02,
+                      horizontal: MediaQuery.of(context).size.width * 0.2,
                       vertical: MediaQuery.of(context).size.height * 0.01),
                   child: InkWell(
                     onTap: () {
@@ -437,7 +444,7 @@ class PriceShow extends StatelessWidget implements CheckOutButtonListner {
         context,
         MaterialPageRoute(builder: (context) => YourMealPlan()),
       );
-    }  else  if (type == "MealPlan") {
+    } else if (type == "MealPlan") {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SignUpScreen()),

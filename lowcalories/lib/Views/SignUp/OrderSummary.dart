@@ -12,10 +12,14 @@ import 'package:lowcalories/Utills/Interfaces/DialogClickInterface.dart';
 import 'package:lowcalories/Utills/UtillMethods.dart';
 import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
 import 'package:lowcalories/Views/CommonWidgets/TextFieldDecoratedWithoutImage.dart';
+import 'package:lowcalories/Views/Home/HomeDashboard.dart';
 import 'package:provider/provider.dart';
 
 class OrderSummary extends StatelessWidget
-    implements AppBarClickInterface, CheckOutButtonListner,DialogClickInterface {
+    implements
+        AppBarClickInterface,
+        CheckOutButtonListner,
+        DialogClickInterface {
   OrderSummary({super.key, required this.goalSelectionScreenNotifier});
 
   late GoalSelectionScreenNotifier goalSelectionScreenNotifier;
@@ -419,7 +423,10 @@ class OrderSummary extends StatelessWidget
 
   @override
   onPositiveClick(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeDashboard()),
+    );
   }
 }
 
