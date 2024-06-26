@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lowcalories/Models/ListModel.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
 import 'package:lowcalories/Utills/AppSizes.dart';
 import 'package:lowcalories/Utills/AppStrings.dart';
 import 'package:lowcalories/Utills/AppStyles.dart';
 import 'package:lowcalories/Views/DashBoard/DashBoard.dart';
+import 'package:lowcalories/Views/Home/HomeDashboard.dart';
 
 class HomeNotifier with ChangeNotifier {
   var stageText = AppStrings().goalScreen1Text;
+  List<ListItem> stage4Items = [
+    ListItem("Assets/ic_sample_food_home.png", "Custom Plan",listSubTitle: ""),
 
+  ];
   showNoItemSelected(BuildContext mContext) {
     showDialog(
         context: mContext,
@@ -84,40 +90,139 @@ class HomeNotifier with ChangeNotifier {
 
   Widget returnSelectedScreen(String screenId, BuildContext context) {
     if (screenId == "Home") {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DefaultTextStyle(
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 21,
-                fontFamily: 'Inter_medium'),
-            child: Text("Discover our Plans"),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.008),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                  color: Color(AppColors().lightGreY60Opacity),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  fontFamily: 'Inter_regular'),
-              child: Text("Choose the meal plan for your goals"),
-            ),
-          ),
-          Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.015),
-            child: StillConfusedHomeWidget(
-              message: "Need a personalized meal plan?\n" + "Let’s Go!",
-            ),
-          )
-        ],
-      );
+      return HomeDashboardWidget();
     }
     return Container();
+  }
+}
+
+class HomeDashboardWidget extends StatelessWidget {
+  const HomeDashboardWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DefaultTextStyle(
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 21,
+              fontFamily: 'Inter_medium'),
+          child: Text("Discover our Plans"),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.008),
+          child: DefaultTextStyle(
+            style: TextStyle(
+                color: Color(AppColors().lightGreY60Opacity),
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+                fontFamily: 'Inter_regular'),
+            child: Text("Choose the meal plan for your goals"),
+          ),
+        ),
+        Padding(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.015),
+          child: StillConfusedHomeWidget(
+            message: "Need a personalized meal plan?\n" + "Let’s Go!",
+          ),
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height*0.6,
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.02),
+          child: Stack(
+            children: [
+
+
+
+              GridView.builder(
+                shrinkWrap: true,
+                gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 5),
+                itemCount: 30,
+                itemBuilder: (context, index) {
+                  return HomeFoodItem(
+                    title: "",
+                  );
+                }),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                          "Assets/ic_message.svg"),
+                    ],
+                  ),
+                ],
+              ),],
+
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class HomeFoodItem extends StatelessWidget {
+  HomeFoodItem({super.key, required this.title});
+
+  String title = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width * 0.45,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Color(0xffECF9EF),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DefaultTextStyle(
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                    fontFamily: 'Inter'),
+                child: Text("Custom Plan"),
+              ),
+              DefaultTextStyle(
+                style: TextStyle(
+                    color: Color(AppColors().titleTextColor),
+                    fontSize: 15,
+                    fontFamily: 'Inter_regular'),
+                child: Text("Starting from AED 100/day"),
+              ),
+            ],
+          ),
+        ),
+        Image.asset(
+          fit: BoxFit.fitWidth,
+          'Assets/ic_sample_food_home.png',
+          height: MediaQuery.of(context).size.height * 0.2,
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
+      ],
+    );
   }
 }
 

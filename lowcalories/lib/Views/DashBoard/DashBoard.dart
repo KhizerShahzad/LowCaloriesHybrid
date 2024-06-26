@@ -315,6 +315,7 @@ class PriceShow extends StatelessWidget implements CheckOutButtonListner {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
+
       children: [
         Container(
             height: MediaQuery.of(context).size.height * 0.2,
@@ -395,7 +396,7 @@ class PriceShow extends StatelessWidget implements CheckOutButtonListner {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.2,
+                      horizontal: MediaQuery.of(context).size.width * 0.05,
                       vertical: MediaQuery.of(context).size.height * 0.01),
                   child: InkWell(
                     onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lowcalories/ChangeNotifiers/HomeProvider.dart';
 import 'package:lowcalories/Utills/AppColors.dart';
@@ -155,9 +156,7 @@ class SideMenuTile extends StatelessWidget {
             .fontRobotoWeight500(16, Color(AppColors().titleTextColor)),
         child: Text(title),
       ),
-      onTap: () {
-
-      },
+      onTap: () {},
       trailing: SvgPicture.asset("Assets/ic_next.svg"),
     );
   }
