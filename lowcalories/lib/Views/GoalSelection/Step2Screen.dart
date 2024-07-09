@@ -136,7 +136,7 @@ class GenderSelectionWidget extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(top: 10),
-        height: MediaQuery.of(context).size.height * 0.09,
+        height: MediaQuery.of(context).size.height * 0.08,
         width: MediaQuery.of(context).size.width * 0.43,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -226,7 +226,7 @@ class DateOfBirth extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(top: 20),
-        height: MediaQuery.of(context).size.height * 0.09,
+        height: MediaQuery.of(context).size.height * 0.07,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -321,7 +321,7 @@ class GoalInputText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: AppSizes().spaceBetweenItems(context)),
-      height: MediaQuery.of(context).size.height * 0.085,
+      height: MediaQuery.of(context).size.height * 0.068,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -332,7 +332,7 @@ class GoalInputText extends StatelessWidget {
         ),
       ),
       child: Container(
-          height: MediaQuery.of(context).size.height * 0.06,
+
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
@@ -355,7 +355,7 @@ class GoalInputText extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
+
                   decoration: BoxDecoration(
                     color: Color(AppColors().itemBack),
                     shape: BoxShape.rectangle,

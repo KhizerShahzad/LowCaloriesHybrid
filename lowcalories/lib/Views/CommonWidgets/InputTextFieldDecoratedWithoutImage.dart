@@ -28,7 +28,7 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: AppSizes().spaceBetweenItems(context)),
-      height: MediaQuery.of(context).size.height * 0.085,
+      height: MediaQuery.of(context).size.height * 0.068,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -39,7 +39,7 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
         ),
       ),
       child: Container(
-          height: MediaQuery.of(context).size.height * 0.06,
+
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
@@ -66,8 +66,7 @@ class InputTextFieldDecoratedWithoutImage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.08,
+
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   child: Padding(

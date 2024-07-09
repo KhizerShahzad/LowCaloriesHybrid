@@ -13,6 +13,7 @@ import 'package:lowcalories/Views/CommonWidgets/AppBarWithArrow.dart';
 import 'package:lowcalories/Views/CommonWidgets/InputTextFieldDecoratedWithoutImage.dart';
 import 'package:lowcalories/Views/CommonWidgets/TextStart.dart';
 import 'package:lowcalories/Views/SignUp/OrderSummary.dart';
+import 'package:lowcalories/Views/SignUp/SelectDeliveryAdress.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -123,7 +124,7 @@ class _SignInScreenState extends State<SignInScreen>
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                 /*         Navigator.push(
+                             /*             Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>

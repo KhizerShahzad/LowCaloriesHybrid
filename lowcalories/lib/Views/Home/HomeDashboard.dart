@@ -12,10 +12,14 @@ import 'package:provider/provider.dart';
 
 class HomeDashboard extends StatelessWidget
     implements HomeAppBarClickInterface {
-  const HomeDashboard({super.key});
+  late HomeNotifier homeNotifier;
+
+  HomeDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    homeNotifier = Provider.of<HomeNotifier>(context, listen: false);
+
     return Scaffold(
       drawer: Drawer(
         backgroundColor: Color(0xffFFFFFF),
@@ -47,55 +51,34 @@ class HomeDashboard extends StatelessWidget
             ),
             Padding(
               padding: EdgeInsets.only(top: 20),
-              child: SideMenuTile(
-                title: "Home",
-              ),
+              child: SideMenuTile(title: "Home", homeNotifier: homeNotifier),
             ),
             SideMenuTile(
               title: "Choose a Plan",
+              homeNotifier: homeNotifier,
             ),
             SideMenuTile(
-              title: "Personal Information",
-            ),
+                title: "Personal Information", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Dietary Preferences",
-            ),
+                title: "Dietary Preferences", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Nutrition Consultations",
-            ),
+                title: "Nutrition Consultations", homeNotifier: homeNotifier),
+            SideMenuTile(title: "Payment Methods", homeNotifier: homeNotifier),
+            SideMenuTile(title: "Meal plans", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Payment Methods",
-            ),
+                title: "Track Plan Progress", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Meal plans",
-            ),
+                title: "Track my progress", homeNotifier: homeNotifier),
+            SideMenuTile(title: "BMI Calculator", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Track Plan Progress",
-            ),
+                title: "Calories Calculator", homeNotifier: homeNotifier),
+            SideMenuTile(title: "Online Clinic", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "Track my progress",
-            ),
+                title: "Schedule & Reminders", homeNotifier: homeNotifier),
+            SideMenuTile(title: "Contact Us", homeNotifier: homeNotifier),
             SideMenuTile(
-              title: "BMI Calculator",
-            ),
-            SideMenuTile(
-              title: "Calories Calculator",
-            ),
-            SideMenuTile(
-              title: "Online Clinic",
-            ),
-            SideMenuTile(
-              title: "Schedule & Reminders",
-            ),
-            SideMenuTile(
-              title: "Contact Us",
-            ),
-            SideMenuTile(
-              title: "Terms & Conditions",
-            ),
-            SideMenuTile(
-              title: "Privacy Policy",
-            ),
+                title: "Terms & Conditions", homeNotifier: homeNotifier),
+            SideMenuTile(title: "Privacy Policy", homeNotifier: homeNotifier),
           ],
         ),
       ),
@@ -112,7 +95,7 @@ class HomeDashboard extends StatelessWidget
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppBarHomeDashboard(
-                      appBarText: "Home",
+                      appBarText: value.currentScreenTitle,
                       appBarClickInterface: this,
                       screenName: ""),
                   Expanded(
@@ -120,7 +103,7 @@ class HomeDashboard extends StatelessWidget
                       padding: EdgeInsets.only(
                           top: AppSizes().GoalSelectionTop(context)),
                       margin: EdgeInsets.only(right: 15, left: 15),
-                      child: value.returnSelectedScreen("Home", context),
+                      child: value.returnSelectedScreen(context),
                     ),
                     flex: 1,
                   ),
@@ -143,8 +126,9 @@ class HomeDashboard extends StatelessWidget
 }
 
 class SideMenuTile extends StatelessWidget {
-  SideMenuTile({super.key, required this.title});
+  SideMenuTile({super.key, required this.title, required this.homeNotifier});
 
+  HomeNotifier homeNotifier;
   String title = "";
 
   @override
@@ -156,7 +140,9 @@ class SideMenuTile extends StatelessWidget {
             .fontRobotoWeight500(16, Color(AppColors().titleTextColor)),
         child: Text(title),
       ),
-      onTap: () {},
+      onTap: () {
+        homeNotifier.updateCurrentScreen(title);
+      },
       trailing: SvgPicture.asset("Assets/ic_next.svg"),
     );
   }
